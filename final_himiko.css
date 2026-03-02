@@ -943,7 +943,7 @@ div.mt-2 {
 .co-card {
     background: linear-gradient(165deg, #0c1628 0%, #091020 45%, #070d1a 100%); 
     border: 1px solid #0f2b3d;
-    border-radius: 0; padding: 24px !important; margin-top: 16px;
+    border-radius: 0; padding: 0 24px 24px 24px !important; margin-top: 16px;
     box-shadow: 0 0 12px rgba(0, 0, 0, 0.4);
     animation: co-fadeUp .6s ease both;
     position: relative;
@@ -951,7 +951,7 @@ div.mt-2 {
 }
 /* Right-stack cards: forced consistent padding */
 .co-right-stack > .co-card {
-    padding: 24px !important;
+    padding: 0 24px 24px 24px !important;
     border-width: 1px 3px 1px 1px;
     border-color: #0f2b3d;
     animation: co-fadeUp .6s ease both, co-heartbeatR 12s ease-in-out infinite
@@ -967,7 +967,7 @@ div.mt-2 {
 .co-card-label {
     font-family: var(--co-font-body) !important; font-size: 0.7em !important; font-weight: 600 !important;
     text-transform: uppercase !important; letter-spacing: 0.12em !important; color: var(--co-accent-soft) !important;
-    margin: 0 0 12px 0 !important; padding: 0 !important;
+    margin: 0 !important; padding: 18px 0 12px 0 !important;
     display: flex !important; align-items: center !important; gap: 8px !important
 }
 .co-card-label::before {
@@ -976,19 +976,18 @@ div.mt-2 {
     flex-shrink: 0;
     box-shadow: 0 0 8px rgba(69, 206, 255, 0.35)
 }
-/* Force every label to identical position regardless of parent */
+/* ALL labels identical — no exceptions */
 .co-right-stack .co-card .co-card-label,
-.co-feedback .co-card-label,
-.co-sc-list-box > .co-card-label {
-    margin: 0 0 12px 0 !important;
-    padding: 0 !important;
-    position: relative !important;
-    top: 0 !important;
-    left: 0 !important
+.co-right-stack .co-feedback .co-card-label,
+.co-card.co-sc-list-box > .co-card-label,
+.co-sc-list-box > .co-card-label,
+.co-card > .co-card-label {
+    margin: 0 !important;
+    padding: 18px 0 12px 0 !important
 }
-/* sc-list-box has padding:0, so its label needs own padding */
+/* sc-list-box has padding:0, so label needs horizontal padding too */
 .co-sc-list-box > .co-card-label {
-    padding: 24px 24px 14px 24px !important
+    padding: 18px 24px 12px 24px !important
 }
 
 .co-card p {
@@ -1292,7 +1291,7 @@ div.mt-2 {
     .co-page { padding: 0 10px }
     .co-header-img { height: 180px }
     .co-name { font-size: 1.6em; margin-top: -20px }
-    .co-card { padding: 18px; margin-top: 12px }
+    .co-card { padding: 0 18px 18px 18px; margin-top: 12px }
     .co-sc-item {
         flex: 0 0 100%; padding: 14px 16px; gap: 12px
     }

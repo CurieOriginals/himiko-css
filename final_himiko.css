@@ -966,7 +966,7 @@ div.mt-2 {
 .co-card-label {
     font-family: var(--co-font-body); font-size: 0.7em; font-weight: 600;
     text-transform: uppercase; letter-spacing: 0.12em; color: var(--co-accent-soft);
-    margin: 0 0 12px 0; display: flex; align-items: center; gap: 8px
+    margin: -6px 0 12px -6px; display: flex; align-items: center; gap: 8px
 }
 .co-card-label::before {
     content: ''; width: 3px; height: 14px; border-radius: 0;
@@ -1071,7 +1071,7 @@ div.mt-2 {
     animation: co-fadeUp .6s ease both, co-heartbeatR 12s ease-in-out infinite !important
 }
 .co-sc-list-box .co-card-label {
-    padding: 24px 24px 14px; flex-shrink: 0
+    padding: 18px 24px 14px 18px; flex-shrink: 0
 }
 
 /* Entries container — fills remaining height */
@@ -1286,7 +1286,7 @@ div.mt-2 {
     .co-sc-text h4 { font-size: 0.9em }
     .co-sc-text p { font-size: 0.78em; line-height: 1.5 }
     .co-sc-num { font-size: 0.75em; width: 28px; height: 22px }
-    .co-scenarios .co-card-label { padding: 16px 16px 10px }
+    .co-scenarios .co-card-label { padding: 10px 16px 10px 10px }
     .co-scenarios .co-card-label::after { right: 16px; font-size: 0.6em }
 
     /* Discussion collapse overflow fix — matches feedback hub */

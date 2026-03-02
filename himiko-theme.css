@@ -1,19 +1,22 @@
 /* --- FONTS --- */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Zen+Antique+Soft&display=swap');
 
-/* --- 1. FULLPAGE BACKGROUND GRADIENT --- */
+/* ===== 1. BACKGROUND — gradient on body ===== */
 body {
-  background: linear-gradient(
-    to bottom,
-    #04060e 0%,
-    #0a1628 40%,
-    #122240 100%
-  ) !important;
+  background-color: #04060e !important;
+  background-image: linear-gradient(to bottom, #04060e 0%, #0a1628 40%, #122240 100%) !important;
   background-attachment: fixed !important;
+  min-height: 100dvh !important;
   position: relative !important;
 }
 
-/* Ant Layout wrapper — make transparent so body BG shows through */
+/* Kill any body::before overlay chub might inject */
+body::before {
+  background: none !important;
+  display: none !important;
+}
+
+/* Make every layout layer transparent so gradient shows through */
 #root,
 #root > div,
 .ant-layout,
@@ -21,29 +24,33 @@ body {
 main.ant-layout-content {
   background: transparent !important;
   background-color: transparent !important;
-  position: relative !important;
-  z-index: 1 !important;
+  position: relative;
+  z-index: 1;
 }
 
-/* --- 2. LEFT & RIGHT SIDE COLUMNS (Background area beside chat) --- */
-/* Make side columns transparent so the body background is visible */
+.no-arrow.no-vertical-anything,
+div.mt-4 {
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+/* ===== 2. SIDE COLUMNS — transparent ===== */
 .ant-col-md-3.ant-col-lg-5 {
   background: transparent !important;
 }
 
-/* --- 3. CHAT FRAME / MAIN CHAT CONTAINER --- */
-/* The middle column that holds the chat — lighter blue, slightly transparent */
+/* ===== 3. CHAT FRAME — blue tint with border ===== */
 .ant-col-xs-24.ant-col-md-18.ant-col-lg-14,
 .ant-col-xs-24.ant-col-md-18 {
   background: rgba(30, 55, 90, 0.55) !important;
   border-radius: 8px !important;
   backdrop-filter: blur(6px) !important;
   -webkit-backdrop-filter: blur(6px) !important;
-  border-left: 1px solid rgba(100, 160, 230, 0.3) !important;
-  border-right: 1px solid rgba(100, 160, 230, 0.3) !important;
+  border-left: 1px solid rgba(100, 160, 230, 0.25) !important;
+  border-right: 1px solid rgba(100, 160, 230, 0.25) !important;
 }
 
-/* --- 4. CHAT MESSAGE AREA BACKGROUND — dark gray, slightly transparent --- */
+/* ===== 4. CHAT MESSAGE AREA — dark gray transparent ===== */
 .ant-list,
 .ant-list-items,
 .ant-spin-container {
@@ -51,18 +58,16 @@ main.ant-layout-content {
   border-radius: 6px !important;
 }
 
-/* Individual message items */
 .ant-list-item {
   background: transparent !important;
   border-bottom: 1px solid rgba(255, 255, 255, 0.06) !important;
 }
 
-/* Message content area */
 .ant-list-item-meta-content {
   background: transparent !important;
 }
 
-/* --- 5. CHAT INPUT FIELD — same dark gray transparent style --- */
+/* ===== 5. CHAT INPUT — dark gray transparent ===== */
 .rounded-top {
   background: rgba(28, 28, 32, 0.70) !important;
   border: 1px solid rgba(80, 130, 190, 0.35) !important;
@@ -100,7 +105,7 @@ main.ant-layout-content {
   box-shadow: 0 0 6px rgba(90, 145, 210, 0.25) !important;
 }
 
-/* --- 6. NAVIGATION BUTTONS — transparent blueish --- */
+/* ===== 6. NAV BUTTONS — blueish transparent ===== */
 .anticon-left,
 .anticon-right,
 .anticon-left svg,
@@ -108,13 +113,11 @@ main.ant-layout-content {
   color: rgba(140, 185, 240, 0.85) !important;
 }
 
-/* If the buttons have a parent button/wrapper */
 .anticon-left:hover,
 .anticon-right:hover {
   color: rgba(180, 210, 255, 1) !important;
 }
 
-/* General button styling in the chat area */
 button:has(> .anticon-left),
 button:has(> .anticon-right) {
   background: rgba(30, 55, 90, 0.45) !important;
@@ -130,50 +133,93 @@ button:has(> .anticon-right):hover {
   background: rgba(40, 70, 115, 0.60) !important;
 }
 
-/* --- 7. TEXT COLORS --- */
+/* ===== 7. MESSAGE CONTROL BUTTONS — keep normal size ===== */
+.message-control-buttons {
+  font-size: inherit !important;
+  font-family: inherit !important;
+  font-weight: inherit !important;
+  line-height: inherit !important;
+}
 
-/* Default text = white (covers dialogue in quotes and everything else) */
-.ant-list-item-meta-content,
-.ant-list-item-meta-content * {
+.message-control-buttons button,
+.message-control-buttons .ant-btn {
+  font-size: inherit !important;
+  font-family: inherit !important;
+  font-weight: inherit !important;
+  line-height: inherit !important;
+}
+
+/* ===== 8. TEXT STYLING — targeted selectors only ===== */
+
+/* Message text — white, Inter font */
+.ant-list-item-meta-description,
+.ant-list-item-meta-description p,
+.ant-list-item-meta-description span:not(.anticon),
+.msg-mkdn-container,
+.msg-mkdn-container p,
+.msg-mkdn-container span:not(.anticon) {
   color: #ffffff !important;
   font-family: 'Inter', sans-serif !important;
   font-weight: 300 !important;
   line-height: 1.7 !important;
 }
 
-/* Bot name — Japanese-style font, no underline */
+/* Bot name — Japanese-style font, NO underline in any state */
 .ant-list-item-meta-title,
 .ant-list-item-meta-title * {
   font-family: 'Zen Antique Soft', serif !important;
-  font-size: 1.1em !important;
+  font-size: 1em !important;
   letter-spacing: 0.05em !important;
   color: rgba(140, 185, 240, 0.9) !important;
+  text-decoration: none !important;
+  border-bottom: none !important;
 }
 
 .ant-list-item-meta-title a,
-.ant-list-item-meta-title a:hover {
+.ant-list-item-meta-title a:link,
+.ant-list-item-meta-title a:visited,
+.ant-list-item-meta-title a:hover,
+.ant-list-item-meta-title a:active,
+.ant-list-item-meta-title a:focus {
   text-decoration: none !important;
   border-bottom: none !important;
+  box-shadow: none !important;
+  background: none !important;
   color: rgba(140, 185, 240, 0.9) !important;
+  font-family: 'Zen Antique Soft', serif !important;
 }
 
-/* Italic text (from *asterisks*) = readable soft blue */
-.ant-list-item-meta-content em,
-.ant-list-item-meta-content i {
+/* Italic text (*asterisks*) = soft blue */
+.ant-list-item-meta-description em,
+.ant-list-item-meta-description i,
+.msg-mkdn-container em,
+.msg-mkdn-container i {
   color: #8bb8e8 !important;
   font-style: italic !important;
   font-family: 'Inter', sans-serif !important;
 }
 
-/* --- 8. HEADER / TOP BAR --- */
-.ant-layout-header,
-header {
+/* Links inside messages — NO underline by default */
+.ant-list-item-meta-description a,
+.msg-mkdn-container a {
+  color: #7ab3e0 !important;
+  text-decoration: none !important;
+}
+
+.ant-list-item-meta-description a:hover,
+.msg-mkdn-container a:hover {
+  color: #a0d0f0 !important;
+  text-decoration: underline !important;
+}
+
+/* ===== 9. HEADER / TOP BAR ===== */
+.ant-layout-header {
   background: rgba(20, 30, 48, 0.75) !important;
   backdrop-filter: blur(6px) !important;
   -webkit-backdrop-filter: blur(6px) !important;
 }
 
-/* --- 9. SCROLLBAR STYLING (optional, for cohesion) --- */
+/* ===== 10. SCROLLBAR ===== */
 ::-webkit-scrollbar {
   width: 6px !important;
 }
@@ -191,18 +237,8 @@ header {
   background: rgba(80, 130, 190, 0.6) !important;
 }
 
-/* --- 10. MISC CLEANUP --- */
-/* Remove any white/light backgrounds that might bleed through */
+/* ===== 11. MISC CLEANUP ===== */
 .ant-card,
-.ant-card-body,
-div.mt-4,
-.no-arrow.no-vertical-anything {
+.ant-card-body {
   background: transparent !important;
-  background-color: transparent !important;
-}
-
-/* Ensure links are visible */
-.ant-list-item-meta-content a {
-  color: #7ab3e0 !important;
-  text-decoration: underline !important;
 }

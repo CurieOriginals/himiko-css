@@ -1,0 +1,165 @@
+/* ============================================
+   HIMIKO CUSTOM THEME — chub.ai
+   Import via: @import url("YOUR_GITHUB_RAW_URL");
+   ============================================ */
+
+/* --- 1. FULLPAGE BACKGROUND IMAGE --- */
+body {
+  background-image: url("https://curie-assets.site/images/Himiko_Chatbg.webp") !important;
+  background-size: cover !important;
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
+  background-attachment: fixed !important;
+}
+
+/* Ant Layout wrapper — make transparent so body BG shows through */
+.ant-layout,
+.ant-layout-content,
+#root,
+#root > div {
+  background: transparent !important;
+}
+
+/* --- 2. LEFT & RIGHT SIDE COLUMNS (Background area beside chat) --- */
+/* Make side columns transparent so the body background is visible */
+.ant-col-md-3.ant-col-lg-5 {
+  background: transparent !important;
+}
+
+/* --- 3. CHAT FRAME / MAIN CHAT CONTAINER --- */
+/* The middle column that holds the chat — lighter blue, slightly transparent */
+.ant-col-xs-24.ant-col-md-18.ant-col-lg-14,
+.ant-col-xs-24.ant-col-md-18 {
+  background: rgba(30, 55, 90, 0.55) !important;
+  border-radius: 8px !important;
+  backdrop-filter: blur(6px) !important;
+  -webkit-backdrop-filter: blur(6px) !important;
+}
+
+/* --- 4. CHAT MESSAGE AREA BACKGROUND — dark gray, slightly transparent --- */
+.ant-list,
+.ant-list-items,
+.ant-spin-container {
+  background: rgba(28, 28, 32, 0.65) !important;
+  border-radius: 6px !important;
+}
+
+/* Individual message items */
+.ant-list-item {
+  background: transparent !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06) !important;
+}
+
+/* Message content area */
+.ant-list-item-meta-content {
+  background: transparent !important;
+}
+
+/* --- 5. CHAT INPUT FIELD — same dark gray transparent style --- */
+.rounded-top,
+.rounded-top textarea,
+.rounded-top input,
+.rounded-top .ant-input,
+.rounded-top .ant-input-affix-wrapper {
+  background: rgba(28, 28, 32, 0.70) !important;
+  border: 1px solid rgba(80, 130, 190, 0.35) !important;
+  color: #ffffff !important;
+  border-radius: 8px !important;
+}
+
+.rounded-top textarea::placeholder,
+.rounded-top input::placeholder {
+  color: rgba(255, 255, 255, 0.4) !important;
+}
+
+.rounded-top textarea:focus,
+.rounded-top input:focus,
+.rounded-top .ant-input:focus,
+.rounded-top .ant-input-affix-wrapper-focused {
+  border-color: rgba(90, 145, 210, 0.6) !important;
+  box-shadow: 0 0 6px rgba(90, 145, 210, 0.25) !important;
+}
+
+/* --- 6. NAVIGATION BUTTONS — transparent blueish --- */
+.anticon-left,
+.anticon-right,
+.anticon-left svg,
+.anticon-right svg {
+  color: rgba(140, 185, 240, 0.85) !important;
+}
+
+/* If the buttons have a parent button/wrapper */
+.anticon-left:hover,
+.anticon-right:hover {
+  color: rgba(180, 210, 255, 1) !important;
+}
+
+/* General button styling in the chat area */
+button:has(> .anticon-left),
+button:has(> .anticon-right) {
+  background: rgba(30, 55, 90, 0.45) !important;
+  border: 1px solid rgba(80, 130, 190, 0.30) !important;
+  border-radius: 6px !important;
+  backdrop-filter: blur(4px) !important;
+  -webkit-backdrop-filter: blur(4px) !important;
+  transition: background 0.2s ease !important;
+}
+
+button:has(> .anticon-left):hover,
+button:has(> .anticon-right):hover {
+  background: rgba(40, 70, 115, 0.60) !important;
+}
+
+/* --- 7. TEXT COLORS --- */
+
+/* Default text = white (covers dialogue in quotes and everything else) */
+.ant-list-item-meta-content,
+.ant-list-item-meta-content * {
+  color: #ffffff !important;
+}
+
+/* Italic text (from *asterisks*) = readable soft blue */
+.ant-list-item-meta-content em,
+.ant-list-item-meta-content i {
+  color: #8bb8e8 !important;
+  font-style: italic !important;
+}
+
+/* --- 8. HEADER / TOP BAR --- */
+.ant-layout-header,
+header {
+  background: rgba(20, 30, 48, 0.75) !important;
+  backdrop-filter: blur(6px) !important;
+  -webkit-backdrop-filter: blur(6px) !important;
+}
+
+/* --- 9. SCROLLBAR STYLING (optional, for cohesion) --- */
+::-webkit-scrollbar {
+  width: 6px !important;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(28, 28, 32, 0.3) !important;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(80, 130, 190, 0.4) !important;
+  border-radius: 3px !important;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(80, 130, 190, 0.6) !important;
+}
+
+/* --- 10. MISC CLEANUP --- */
+/* Remove any white/light backgrounds that might bleed through */
+.ant-card,
+.ant-card-body {
+  background: transparent !important;
+}
+
+/* Ensure links are visible */
+.ant-list-item-meta-content a {
+  color: #7ab3e0 !important;
+  text-decoration: underline !important;
+}

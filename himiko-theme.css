@@ -1,46 +1,16 @@
-/* ============================================
-   HIMIKO CUSTOM THEME — chub.ai
-   Import via: @import url("YOUR_GITHUB_RAW_URL");
-   ============================================ */
+/* --- FONTS --- */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Zen+Antique+Soft&display=swap');
 
-/* --- 1. FULLPAGE BACKGROUND IMAGE --- */
+/* --- 1. FULLPAGE BACKGROUND GRADIENT --- */
 body {
-  background-color: #0a0c1a !important;
-  background-image: none !important;
-  position: relative !important;
-}
-
-body::before {
-  content: '' !important;
-  position: fixed !important;
-  top: 0 !important;
-  left: 0 !important;
-  width: 100vw !important;
-  height: 100dvh !important;
-  z-index: -2 !important;
-  pointer-events: none !important;
-  background-image: url("https://avatars.charhub.io/avatars/uploads/images/gallery/file/d42e56d0-5975-40ba-9daa-47915f91d121/87f85dce-c7ca-464d-80b9-fb308cf41a5b.webp") !important;
-  background-size: cover !important;
-  background-position: center center !important;
-  background-repeat: no-repeat !important;
-  opacity: 0.25 !important;
-}
-
-/* Dark overlay on top of the BG image for extra readability */
-body::after {
-  content: '' !important;
-  position: fixed !important;
-  top: 0 !important;
-  left: 0 !important;
-  width: 100vw !important;
-  height: 100dvh !important;
-  z-index: -1 !important;
-  pointer-events: none !important;
   background: linear-gradient(
     to bottom,
-    rgba(8, 10, 22, 0.4) 0%,
-    rgba(8, 10, 22, 0.7) 100%
+    #04060e 0%,
+    #0a1628 40%,
+    #122240 100%
   ) !important;
+  background-attachment: fixed !important;
+  position: relative !important;
 }
 
 /* Ant Layout wrapper — make transparent so body BG shows through */
@@ -69,6 +39,8 @@ main.ant-layout-content {
   border-radius: 8px !important;
   backdrop-filter: blur(6px) !important;
   -webkit-backdrop-filter: blur(6px) !important;
+  border-left: 1px solid rgba(100, 160, 230, 0.3) !important;
+  border-right: 1px solid rgba(100, 160, 230, 0.3) !important;
 }
 
 /* --- 4. CHAT MESSAGE AREA BACKGROUND — dark gray, slightly transparent --- */
@@ -106,6 +78,7 @@ main.ant-layout-content {
   outline: none !important;
   box-shadow: none !important;
   color: #ffffff !important;
+  font-family: 'Inter', sans-serif !important;
 }
 
 .rounded-top textarea::placeholder,
@@ -163,6 +136,25 @@ button:has(> .anticon-right):hover {
 .ant-list-item-meta-content,
 .ant-list-item-meta-content * {
   color: #ffffff !important;
+  font-family: 'Inter', sans-serif !important;
+  font-weight: 300 !important;
+  line-height: 1.7 !important;
+}
+
+/* Bot name — Japanese-style font, no underline */
+.ant-list-item-meta-title,
+.ant-list-item-meta-title * {
+  font-family: 'Zen Antique Soft', serif !important;
+  font-size: 1.1em !important;
+  letter-spacing: 0.05em !important;
+  color: rgba(140, 185, 240, 0.9) !important;
+}
+
+.ant-list-item-meta-title a,
+.ant-list-item-meta-title a:hover {
+  text-decoration: none !important;
+  border-bottom: none !important;
+  color: rgba(140, 185, 240, 0.9) !important;
 }
 
 /* Italic text (from *asterisks*) = readable soft blue */
@@ -170,6 +162,7 @@ button:has(> .anticon-right):hover {
 .ant-list-item-meta-content i {
   color: #8bb8e8 !important;
   font-style: italic !important;
+  font-family: 'Inter', sans-serif !important;
 }
 
 /* --- 8. HEADER / TOP BAR --- */

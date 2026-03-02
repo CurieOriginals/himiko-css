@@ -943,15 +943,14 @@ div.mt-2 {
 .co-card {
     background: linear-gradient(165deg, #0c1628 0%, #091020 45%, #070d1a 100%); 
     border: 1px solid #0f2b3d;
-    border-radius: 0; padding: 0 24px 24px 24px !important; margin-top: 16px;
+    border-radius: 0; margin-top: 16px;
     box-shadow: 0 0 12px rgba(0, 0, 0, 0.4);
     animation: co-fadeUp .6s ease both;
     position: relative;
     overflow: hidden
 }
-/* Right-stack cards: forced consistent padding */
+/* Right-stack cards */
 .co-right-stack > .co-card {
-    padding: 0 24px 24px 24px !important;
     border-width: 1px 3px 1px 1px;
     border-color: #0f2b3d;
     animation: co-fadeUp .6s ease both, co-heartbeatR 12s ease-in-out infinite
@@ -967,8 +966,9 @@ div.mt-2 {
 .co-card-label {
     font-family: var(--co-font-body) !important; font-size: 0.7em !important; font-weight: 600 !important;
     text-transform: uppercase !important; letter-spacing: 0.12em !important; color: var(--co-accent-soft) !important;
-    margin: 0 !important; padding: 18px 0 12px 0 !important;
-    display: flex !important; align-items: center !important; gap: 8px !important
+    margin: 0 0 12px 0 !important; padding: 0 !important;
+    display: flex !important; align-items: center !important; gap: 8px !important;
+    box-sizing: border-box !important
 }
 .co-card-label::before {
     content: ''; width: 3px; height: 14px; border-radius: 0;
@@ -976,18 +976,20 @@ div.mt-2 {
     flex-shrink: 0;
     box-shadow: 0 0 8px rgba(69, 206, 255, 0.35)
 }
-/* ALL labels identical — no exceptions */
-.co-right-stack .co-card .co-card-label,
-.co-right-stack .co-feedback .co-card-label,
-.co-card.co-sc-list-box > .co-card-label,
-.co-sc-list-box > .co-card-label,
-.co-card > .co-card-label {
-    margin: 0 !important;
-    padding: 18px 0 12px 0 !important
+/* ═══ UNIFORM CARD PADDING — every box 20px all sides ═══ */
+.co-page .co-card,
+.co-page .co-right-stack > .co-card,
+.co-page .co-card.co-feedback,
+.co-page .co-card.co-credits {
+    padding: 20px !important
 }
-/* sc-list-box has padding:0, so label needs horizontal padding too */
-.co-sc-list-box > .co-card-label {
-    padding: 18px 24px 12px 24px !important
+/* Scenarios box: padding 0 on box, label gets own padding */
+.co-page .co-card.co-sc-list-box {
+    padding: 0 !important
+}
+.co-page .co-card.co-sc-list-box > .co-card-label {
+    padding: 20px 20px 12px 20px !important;
+    margin: 0 !important
 }
 
 .co-card p {
@@ -1291,7 +1293,7 @@ div.mt-2 {
     .co-page { padding: 0 10px }
     .co-header-img { height: 180px }
     .co-name { font-size: 1.6em; margin-top: -20px }
-    .co-card { padding: 0 18px 18px 18px; margin-top: 12px }
+    .co-card { padding: 16px !important; margin-top: 12px }
     .co-sc-item {
         flex: 0 0 100%; padding: 14px 16px; gap: 12px
     }
@@ -1299,7 +1301,7 @@ div.mt-2 {
     .co-sc-text h4 { font-size: 0.9em }
     .co-sc-text p { font-size: 0.78em; line-height: 1.5 }
     .co-sc-num { font-size: 0.75em; width: 28px; height: 22px }
-    .co-scenarios .co-card-label { padding: 18px 18px 10px 18px !important }
+    .co-scenarios .co-card-label { padding: 16px 16px 10px 16px !important }
     .co-scenarios .co-card-label::after { right: 16px; font-size: 0.6em }
 
     /* Discussion collapse overflow fix — matches feedback hub */

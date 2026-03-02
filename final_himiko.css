@@ -761,85 +761,80 @@ div.mt-2 {
     50% { box-shadow: 0 0 25px rgba(77, 166, 255, 0.5), 0 0 50px rgba(192, 224, 255, 0.15), 0 0 80px rgba(77, 166, 255, 0.08) }
 }
 
-/* Fox fire border flicker — visible border glow cycling blue↔white */
+/* Fox fire border flicker — vivid blue↔cyan cycling */
 @keyframes co-foxFlicker {
     0%, 100% {
-        border-color: rgba(77, 166, 255, 0.15);
-        box-shadow: 0 0 8px rgba(77, 166, 255, 0.05), 0 0 2px rgba(77, 166, 255, 0.1)
+        border-color: rgba(77, 166, 255, 0.18);
+        box-shadow: 0 0 8px rgba(77, 166, 255, 0.06), 0 0 3px rgba(76, 224, 254, 0.1)
     }
     20% {
-        border-color: rgba(77, 166, 255, 0.3);
-        box-shadow: 0 0 12px rgba(77, 166, 255, 0.1), 0 0 25px rgba(77, 166, 255, 0.04)
+        border-color: rgba(76, 224, 254, 0.35);
+        box-shadow: 0 0 14px rgba(76, 224, 254, 0.12), 0 0 30px rgba(77, 166, 255, 0.05)
     }
     40% {
-        border-color: rgba(192, 224, 255, 0.25);
-        box-shadow: 0 0 16px rgba(192, 224, 255, 0.08), 0 0 30px rgba(77, 166, 255, 0.05)
+        border-color: rgba(77, 166, 255, 0.25);
+        box-shadow: 0 0 10px rgba(77, 166, 255, 0.08)
     }
     60% {
-        border-color: rgba(77, 166, 255, 0.35);
-        box-shadow: 0 0 20px rgba(77, 166, 255, 0.12), 0 0 40px rgba(77, 166, 255, 0.05), 0 0 60px rgba(192, 224, 255, 0.02)
+        border-color: rgba(76, 224, 254, 0.4);
+        box-shadow: 0 0 20px rgba(76, 224, 254, 0.15), 0 0 45px rgba(76, 224, 254, 0.05)
     }
     80% {
-        border-color: rgba(192, 224, 255, 0.2);
-        box-shadow: 0 0 10px rgba(192, 224, 255, 0.06), 0 0 20px rgba(77, 166, 255, 0.04)
+        border-color: rgba(77, 166, 255, 0.2);
+        box-shadow: 0 0 12px rgba(77, 166, 255, 0.08), 0 0 25px rgba(76, 224, 254, 0.04)
     }
 }
 
-/* Fox fire profile/preview box pulse — breathing glow that's VISIBLE */
+/* Fox fire profile/preview pulse — vivid breathing glow */
 @keyframes co-foxFirePulse {
     0%, 100% {
-        box-shadow: 0 0 10px rgba(77, 166, 255, 0.08), 0 0 25px rgba(77, 166, 255, 0.04);
+        box-shadow: 0 0 10px rgba(77, 166, 255, 0.1), 0 0 25px rgba(76, 224, 254, 0.04);
         border-color: rgba(77, 166, 255, 0.2)
     }
     25% {
-        box-shadow: 0 0 20px rgba(77, 166, 255, 0.18), 0 0 45px rgba(77, 166, 255, 0.08), 0 0 65px rgba(192, 224, 255, 0.04);
-        border-color: rgba(77, 166, 255, 0.35)
+        box-shadow: 0 0 22px rgba(76, 224, 254, 0.2), 0 0 50px rgba(77, 166, 255, 0.08), 0 0 70px rgba(76, 224, 254, 0.04);
+        border-color: rgba(76, 224, 254, 0.35)
     }
     50% {
-        box-shadow: 0 0 30px rgba(77, 166, 255, 0.25), 0 0 60px rgba(77, 166, 255, 0.1), 0 0 90px rgba(192, 224, 255, 0.05);
-        border-color: rgba(77, 166, 255, 0.45)
+        box-shadow: 0 0 35px rgba(76, 224, 254, 0.3), 0 0 70px rgba(76, 224, 254, 0.12), 0 0 100px rgba(77, 166, 255, 0.06);
+        border-color: rgba(76, 224, 254, 0.5)
     }
     75% {
-        box-shadow: 0 0 18px rgba(192, 224, 255, 0.15), 0 0 40px rgba(77, 166, 255, 0.08);
-        border-color: rgba(192, 224, 255, 0.25)
+        box-shadow: 0 0 20px rgba(77, 166, 255, 0.15), 0 0 45px rgba(76, 224, 254, 0.06);
+        border-color: rgba(77, 166, 255, 0.25)
     }
 }
 
-/* Fox fire inner glow — hotspots shift inside cards */
+/* Fox fire inner glow — SMOOTH transform movement, no background swap */
 @keyframes co-foxInnerGlow {
-    0%, 100% {
-        background:
-            radial-gradient(ellipse 40% 50% at 0% 100%, rgba(77, 166, 255, 0.08) 0%, transparent 60%),
-            radial-gradient(ellipse 35% 45% at 100% 0%, rgba(192, 224, 255, 0.04) 0%, transparent 60%),
-            radial-gradient(ellipse 25% 30% at 50% 50%, rgba(77, 166, 255, 0.02) 0%, transparent 50%)
-    }
-    33% {
-        background:
-            radial-gradient(ellipse 45% 55% at 10% 80%, rgba(77, 166, 255, 0.1) 0%, transparent 60%),
-            radial-gradient(ellipse 30% 40% at 90% 20%, rgba(192, 224, 255, 0.06) 0%, transparent 60%),
-            radial-gradient(ellipse 30% 35% at 30% 40%, rgba(77, 166, 255, 0.04) 0%, transparent 50%)
-    }
-    66% {
-        background:
-            radial-gradient(ellipse 35% 45% at 5% 90%, rgba(192, 224, 255, 0.06) 0%, transparent 60%),
-            radial-gradient(ellipse 40% 50% at 95% 10%, rgba(77, 166, 255, 0.08) 0%, transparent 60%),
-            radial-gradient(ellipse 20% 25% at 60% 60%, rgba(192, 224, 255, 0.05) 0%, transparent 50%)
-    }
+    0% { transform: translate(0%, 0%) scale(1) }
+    25% { transform: translate(8%, -6%) scale(1.05) }
+    50% { transform: translate(-5%, 8%) scale(0.95) }
+    75% { transform: translate(6%, 4%) scale(1.03) }
+    100% { transform: translate(0%, 0%) scale(1) }
 }
 
-/* Fox fire bottom edge flame — light sweeps along bottom border */
+/* Fox fire bottom flame — opacity + shadow pulse */
 @keyframes co-foxEdgeFlame {
     0%, 100% {
-        background: linear-gradient(90deg, transparent 0%, rgba(77, 166, 255, 0.15) 20%, rgba(192, 224, 255, 0.4) 50%, rgba(77, 166, 255, 0.15) 80%, transparent 100%);
-        opacity: 0.5
+        opacity: 0.5;
+        box-shadow: 0 0 6px rgba(76, 224, 254, 0.3), 0 0 15px rgba(76, 224, 254, 0.1), 0 -3px 10px rgba(76, 224, 254, 0.06)
     }
-    50% {
-        background: linear-gradient(90deg, transparent 5%, rgba(192, 224, 255, 0.3) 30%, rgba(255, 255, 255, 0.5) 50%, rgba(192, 224, 255, 0.3) 70%, transparent 95%);
-        opacity: 1
+    30% {
+        opacity: 0.9;
+        box-shadow: 0 0 10px rgba(76, 224, 254, 0.5), 0 0 25px rgba(76, 224, 254, 0.2), 0 -6px 18px rgba(76, 224, 254, 0.1)
+    }
+    60% {
+        opacity: 0.6;
+        box-shadow: 0 0 8px rgba(76, 224, 254, 0.4), 0 0 18px rgba(77, 166, 255, 0.15), 0 -4px 12px rgba(76, 224, 254, 0.08)
+    }
+    85% {
+        opacity: 1;
+        box-shadow: 0 0 12px rgba(76, 224, 254, 0.6), 0 0 30px rgba(76, 224, 254, 0.25), 0 -8px 22px rgba(76, 224, 254, 0.12)
     }
 }
 
-/* Fox fire border shimmer — kept for potential use */
+/* Fox fire border shimmer */
 @keyframes co-foxBorderShimmer {
     0%, 100% { opacity: 0.3 }
     50% { opacity: 0.8 }
@@ -885,29 +880,38 @@ div.mt-2 {
 .co-card {
     background: linear-gradient(160deg, rgba(8, 16, 35, 0.96) 0%, rgba(4, 8, 16, 0.98) 100%); 
     border: 1px solid rgba(77, 166, 255, 0.15);
-    border-left: 3px solid rgba(77, 166, 255, 0.4);
+    border-left: 3px solid rgba(76, 224, 254, 0.4);
     border-radius: 0; padding: 24px; margin-top: 16px;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
     animation: co-fadeUp .6s ease both, co-foxFlicker 6s ease-in-out infinite;
     position: relative;
     overflow: hidden
 }
-/* Fox fire inner glow — animated hotspots */
+/* Fox fire inner glow — oversized, moves smoothly via transform */
 .co-card::before {
-    content: ''; position: absolute; inset: 0; pointer-events: none; z-index: 0;
+    content: ''; position: absolute; top: -50%; left: -30%; width: 160%; height: 200%;
+    pointer-events: none; z-index: 0;
     background:
-        radial-gradient(ellipse 40% 50% at 0% 100%, rgba(77, 166, 255, 0.08) 0%, transparent 60%),
-        radial-gradient(ellipse 35% 45% at 100% 0%, rgba(192, 224, 255, 0.05) 0%, transparent 60%),
-        radial-gradient(ellipse 25% 30% at 50% 50%, rgba(77, 166, 255, 0.03) 0%, transparent 50%);
-    animation: co-foxInnerGlow 5s ease-in-out infinite
+        radial-gradient(ellipse 35% 30% at 30% 60%, rgba(76, 224, 254, 0.12) 0%, transparent 70%),
+        radial-gradient(ellipse 30% 25% at 70% 40%, rgba(77, 166, 255, 0.1) 0%, transparent 65%),
+        radial-gradient(ellipse 25% 40% at 50% 80%, rgba(76, 224, 254, 0.08) 0%, transparent 60%);
+    animation: co-foxInnerGlow 6s ease-in-out infinite
 }
 /* Ensure card content above glow */
 .co-card > * { position: relative; z-index: 1 }
-/* Fox fire bottom edge flame line */
+/* Fox fire bottom flame — flickering edge */
 .co-card::after {
-    content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
-    background: linear-gradient(90deg, transparent 0%, rgba(77, 166, 255, 0.3) 20%, rgba(192, 224, 255, 0.5) 50%, rgba(77, 166, 255, 0.3) 80%, transparent 100%);
-    animation: co-foxEdgeFlame 3s ease-in-out infinite;
+    content: ''; position: absolute; bottom: -1px; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, 
+        transparent 0%, 
+        rgba(77, 166, 255, 0.5) 15%, 
+        rgba(76, 224, 254, 0.8) 35%, 
+        rgba(255, 255, 255, 0.7) 50%, 
+        rgba(76, 224, 254, 0.8) 65%, 
+        rgba(77, 166, 255, 0.5) 85%, 
+        transparent 100%);
+    box-shadow: 0 0 8px rgba(76, 224, 254, 0.4), 0 0 20px rgba(76, 224, 254, 0.15), 0 -4px 12px rgba(76, 224, 254, 0.08);
+    animation: co-foxEdgeFlame 2.5s ease-in-out infinite;
     z-index: 2
 }
 .co-card:nth-child(3) { animation-delay: .15s }
@@ -921,9 +925,9 @@ div.mt-2 {
 }
 .co-card-label::before {
     content: ''; width: 3px; height: 14px; border-radius: 0;
-    background: linear-gradient(to bottom, #4da6ff, #c0e0ff);
+    background: linear-gradient(to bottom, #4da6ff, #4ce0fe);
     flex-shrink: 0;
-    box-shadow: 0 0 8px rgba(77, 166, 255, 0.3)
+    box-shadow: 0 0 8px rgba(76, 224, 254, 0.4)
 }
 
 .co-card p {
@@ -935,7 +939,7 @@ div.mt-2 {
 .co-profile-box {
     padding: 0 !important; overflow: hidden;
     border: 1px solid rgba(77, 166, 255, 0.3) !important;
-    border-left: 3px solid rgba(77, 166, 255, 0.5) !important;
+    border-left: 3px solid rgba(76, 224, 254, 0.5) !important;
     box-shadow: 0 0 15px rgba(77, 166, 255, 0.1), 0 0 35px rgba(77, 166, 255, 0.05), inset 0 0 30px rgba(77, 166, 255, 0.03);
     animation: co-foxFirePulse 5s ease-in-out infinite !important
 }

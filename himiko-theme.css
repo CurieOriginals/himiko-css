@@ -1,19 +1,41 @@
+/* ============================================
+   HIMIKO CUSTOM THEME — chub.ai
+   Import via: @import url("YOUR_GITHUB_RAW_URL");
+   ============================================ */
+
 /* --- 1. FULLPAGE BACKGROUND IMAGE --- */
 body {
-  background-image: url("https://curie-assets.site/images/Himiko_Chatbg.webp") !important;
-  background-size: 100% auto !important;
-  background-position: top center !important;
+  background-color: #0a0c1a !important;
+  background-image: none !important;
+  position: relative !important;
+}
+
+body::before {
+  content: '' !important;
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100vw !important;
+  height: 100dvh !important;
+  z-index: -2 !important;
+  pointer-events: none !important;
+  background-image: url("https://avatars.charhub.io/avatars/uploads/images/gallery/file/d42e56d0-5975-40ba-9daa-47915f91d121/87f85dce-c7ca-464d-80b9-fb308cf41a5b.webp") !important;
+  background-size: cover !important;
+  background-position: center !important;
   background-repeat: no-repeat !important;
-  background-attachment: fixed !important;
-  background-color: #0a0a12 !important;
+  opacity: 0.5 !important;
 }
 
 /* Ant Layout wrapper — make transparent so body BG shows through */
+#root,
+#root > div,
 .ant-layout,
 .ant-layout-content,
-#root,
-#root > div {
+main.ant-layout-content {
   background: transparent !important;
+  background-color: transparent !important;
+  position: relative !important;
+  z-index: 1 !important;
 }
 
 /* --- 2. LEFT & RIGHT SIDE COLUMNS (Background area beside chat) --- */
@@ -162,8 +184,11 @@ header {
 /* --- 10. MISC CLEANUP --- */
 /* Remove any white/light backgrounds that might bleed through */
 .ant-card,
-.ant-card-body {
+.ant-card-body,
+div.mt-4,
+.no-arrow.no-vertical-anything {
   background: transparent !important;
+  background-color: transparent !important;
 }
 
 /* Ensure links are visible */

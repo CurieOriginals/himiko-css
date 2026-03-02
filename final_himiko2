@@ -1,1 +1,1344 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap');
 
+/* ═══════════════════════════════════════
+   CURIE ORIGINALS — 2026
+   ═══════════════════════════════════════ */
+
+:root {
+    --co-bg: #040810;
+    --co-surface: rgba(6, 12, 28, 0.9);
+    --co-surface-hover: rgba(12, 22, 48, 0.95);
+    --co-glass: rgba(77, 166, 255, 0.03);
+    --co-glass-border: rgba(77, 166, 255, 0.12);
+    --co-accent: #4da6ff;
+    --co-accent-soft: #8ec8ff;
+    --co-accent-deep: #c0e0ff;
+    --co-accent-glow: rgba(77, 166, 255, 0.15);
+    --co-gold: #c0e0ff;
+    --co-text: rgba(220, 235, 255, 0.9);
+    --co-text-dim: rgba(180, 210, 240, 0.5);
+    --co-text-faint: rgba(140, 180, 220, 0.3);
+    --co-radius: 0px;
+    --co-radius-sm: 0px;
+    --co-radius-xs: 0px;
+    --co-font-body: 'Inter', 'Noto Sans JP', sans-serif;
+    --co-font-display: 'Noto Sans JP', sans-serif;
+    --co-font-mono: 'JetBrains Mono', monospace;
+    --co-font-size: clamp(12px, 1.2vw, 14px);
+    --co-height: 42px;
+    --co-inset: 16px;
+    --co-fav-gap: 10px;
+    --co-fav-width: clamp(100px, 14vw, 150px);
+    --co-btn-solid: #060d1c;
+    --co-btn-solid-hover: #0c1a30;
+    --co-btn-transition: all .25s cubic-bezier(.4, 0, .2, 1);
+    --co-page-width: 1300px;
+    --fox-blue: #4da6ff;
+    --fox-white: #c0e0ff;
+    --fox-glow: rgba(77, 166, 255, 0.2);
+    --fox-glow-strong: rgba(77, 166, 255, 0.4);
+    --fox-glow-white: rgba(192, 224, 255, 0.15);
+
+    /* Foxfire sequenced border sweep (clockwise) */
+    --co-seq-cycle: 16s;
+    --co-seq-slot: 4s;
+    --co-border-w: 2px;
+
+    /* Foxfire palette */
+    --foxfire-core: rgba(192, 224, 255, 0.92);
+    --foxfire-blue: rgba(69, 206, 255, 0.95);
+    --foxfire-blue-soft: rgba(77, 166, 255, 0.55);
+    --foxfire-haze: rgba(69, 206, 255, 0.14);
+}
+
+@media (min-width:768px) { :root { --co-inset: 24px } }
+@media (min-width:1200px) { :root { --co-inset: 32px } }
+
+/* ═══ GLOBAL RESETS ═══ */
+a { color: var(--co-accent); text-decoration: none; transition: opacity .2s ease }
+a:hover { opacity: .78 }
+
+spacer {
+    display: none !important; width: 0 !important; height: 0 !important;
+    margin: 0 !important; padding: 0 !important; border: 0 !important;
+    font-size: 0 !important; line-height: 0 !important; overflow: hidden !important;
+    max-height: 0 !important; visibility: hidden !important
+}
+
+div.mt-2>.font-size-message { display: none !important }
+
+body {
+    background-color: #040810 !important;
+    background-image:
+        linear-gradient(180deg, #08101e 0%, #050c18 30%, #040810 60%, #020508 100%) !important;
+    position: relative !important;
+    min-height: 100dvh !important;
+    padding-bottom: 40px !important
+}
+
+/* Fox fire glow — left side, cool blue, floats up and down */
+body::before {
+    content: ''; position: fixed; left: -5%; top: -10%; width: 55%; height: 120%;
+    background:
+        radial-gradient(ellipse 60% 35% at 25% 50%, rgba(77, 166, 255, 0.12) 0%, transparent 70%),
+        radial-gradient(ellipse 30% 20% at 15% 40%, rgba(192, 224, 255, 0.06) 0%, transparent 60%);
+    z-index: 0; pointer-events: none;
+    animation: co-glowFloat 8s ease-in-out infinite
+}
+
+/* Fox fire glow — right side, white-blue, offset */
+body::after {
+    content: ''; position: fixed; right: -5%; top: -10%; width: 55%; height: 120%;
+    background:
+        radial-gradient(ellipse 60% 35% at 75% 50%, rgba(77, 166, 255, 0.08) 0%, transparent 70%),
+        radial-gradient(ellipse 30% 20% at 85% 60%, rgba(192, 224, 255, 0.05) 0%, transparent 60%);
+    z-index: 0; pointer-events: none;
+    animation: co-glowFloat 8s ease-in-out infinite;
+    animation-delay: -4s
+}
+
+.galaxy-bg { background-image: none !important; background-size: 0 !important }
+.no-arrow.no-vertical-anything { background-color: transparent !important }
+
+div.mt-4 { background: transparent !important; background-color: transparent !important }
+
+/* Hide ribbon text */
+.ant-ribbon-text { display: none !important; visibility: hidden !important }
+
+/* Center the entire row — NO max-width here, let platform elements go full width.
+   Content width is controlled by .co-page, header by its own max-width */
+.ant-row.ant-row-center {
+    margin-left: auto !important;
+    margin-right: auto !important;
+    padding-left: 16px !important;
+    padding-right: 16px !important
+}
+
+/* ═══ DESKTOP (≥992px) ═══ */
+@media (min-width:992px) {
+
+    /* Left column → full-width HEADER with CSS Grid inside */
+    .ant-row.ant-row-center>.ant-col-lg-6:first-child {
+        flex: 0 0 100% !important;
+        max-width: var(--co-page-width) !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        display: grid !important;
+        grid-template-columns: 1fr !important;
+        grid-template-rows: 1fr auto auto !important;
+        align-items: end !important;
+        row-gap: 4px !important;
+        overflow: visible !important;
+        position: relative !important;
+        min-height: 340px !important;
+        padding: 0 16px 0 !important;
+        margin-bottom: 80px !important;
+        border-radius: var(--co-radius) !important;
+        background: url('https://curie-assets.site/images/Himiko_Header.webp') center 40% / cover no-repeat !important;
+        box-sizing: border-box !important
+    }
+
+    /* Gradient fade overlay */
+    .ant-row.ant-row-center>.ant-col-lg-6:first-child::before {
+        content: '' !important;
+        position: absolute !important;
+        inset: 0 !important;
+        border-radius: var(--co-radius) !important;
+        background: linear-gradient(to top, rgba(4, 8, 16, 1) 0%, rgba(4, 8, 16, 0.75) 25%, rgba(4, 8, 16, 0.2) 55%, transparent 100%) !important;
+        z-index: 0 !important;
+        pointer-events: none !important
+    }
+
+    /* Tagline — centered in header */
+    .ant-row.ant-row-center>.ant-col-lg-6:first-child::after {
+        content: '5 GREETINGS  ·  10 IMAGES' !important;
+        grid-column: 1 !important;
+        grid-row: 2 !important;
+        align-self: end !important;
+        justify-self: center !important;
+        z-index: 1 !important;
+        font-family: var(--co-font-body) !important;
+        font-size: 0.78em !important;
+        font-weight: 600 !important;
+        color: rgba(255, 255, 255, 0.85) !important;
+        white-space: nowrap !important;
+        text-shadow: 0 1px 8px rgba(0, 0, 0, 0.6) !important;
+        letter-spacing: 0.14em !important;
+        text-transform: uppercase !important;
+        line-height: 1 !important;
+        padding-bottom: 6px !important;
+        animation: none !important
+    }
+
+    /* All direct children above gradient */
+    .ant-row.ant-row-center>.ant-col-lg-6:first-child>* {
+        position: relative !important;
+        z-index: 1 !important
+    }
+
+    /* Avatar wrapper — hidden (no avatar) */
+    .ant-row.ant-row-center>.ant-col-lg-6:first-child>div:not(.mt-4) {
+        display: none !important
+    }
+
+    /* Action buttons (Chat, Import, Download) — left-aligned with boxes */
+    .ant-row.ant-row-center>.ant-col-lg-6:first-child>.mt-4:has(svg.lucide-messages-square) {
+        grid-column: 1 !important;
+        grid-row: 3 !important;
+        margin: 0 !important;
+        margin-bottom: -80px !important;
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        justify-content: flex-start !important;
+        gap: 8px !important;
+        background: transparent !important;
+        padding-top: 12px !important
+    }
+
+    .ant-row.ant-row-center>.ant-col-lg-6:first-child>.mt-4:has(svg.lucide-messages-square)>* {
+        margin: 0 !important
+    }
+
+    .ant-row.ant-row-center>.ant-col-lg-6:first-child>.mt-4:has(svg.lucide-messages-square)>button {
+        width: auto !important;
+        min-width: 0 !important
+    }
+
+    /* Import+Download group → left next to Chat, no push right */
+    .ant-row.ant-row-center>.ant-col-lg-6:first-child>.mt-4:has(svg.lucide-messages-square)>.flex {
+        margin-left: 0 !important;
+        margin-right: 0 !important
+    }
+
+    /* Favorite button — hidden in grid, folded into action row */
+    .ant-row.ant-row-center>.ant-col-lg-6:first-child>.mt-4:has(.anticon-star) {
+        display: none !important
+    }
+
+    /* Content column → full width below */
+    .ant-row.ant-row-center>.ant-col-lg-18 {
+        flex: 0 0 100% !important;
+        max-width: 100% !important;
+        margin-top: 0 !important;
+        padding-left: 0 !important;
+        padding-right: 0 !important
+    }
+
+    /* Platform elements inside content column — constrain to page width */
+    .ant-row.ant-row-center>.ant-col-lg-18>.ant-row {
+        padding-top: 0 !important;
+        margin-top: 0 !important
+    }
+}
+
+/* ═══ MOBILE (<992px) ═══ */
+@media (max-width:991px) {
+    .ant-col.text-left.ant-col-xs-24.ant-col-lg-6 {
+        display: grid !important;
+        grid-template-columns: 1fr !important;
+        grid-template-rows: 1fr auto auto !important;
+        align-items: end !important;
+        row-gap: 4px !important;
+        position: relative !important;
+        min-height: 200px !important;
+        padding: 0 14px 0 !important;
+        margin-bottom: 72px !important;
+        border-radius: var(--co-radius) !important;
+        background: url('https://curie-assets.site/images/Himiko_Header.webp') center 40% / cover no-repeat !important
+    }
+    .ant-col.text-left.ant-col-xs-24.ant-col-lg-6::before {
+        content: '' !important;
+        position: absolute !important;
+        inset: 0 !important;
+        border-radius: var(--co-radius) !important;
+        background: linear-gradient(to top, rgba(4, 8, 16, 1) 0%, rgba(4, 8, 16, 0.75) 25%, rgba(4, 8, 16, 0.2) 55%, transparent 100%) !important;
+        z-index: 0 !important;
+        pointer-events: none !important
+    }
+    .ant-col.text-left.ant-col-xs-24.ant-col-lg-6::after {
+        content: '5 GREETINGS  ·  10 IMAGES' !important;
+        grid-column: 1 !important;
+        grid-row: 2 !important;
+        align-self: end !important;
+        justify-self: center !important;
+        z-index: 1 !important;
+        font-family: var(--co-font-body) !important;
+        font-size: 0.65em !important;
+        font-weight: 600 !important;
+        color: rgba(255, 255, 255, 0.85) !important;
+        white-space: nowrap !important;
+        text-shadow: 0 1px 8px rgba(0, 0, 0, 0.6) !important;
+        letter-spacing: 0.12em !important;
+        text-transform: uppercase !important;
+        line-height: 1 !important;
+        padding-bottom: 4px !important;
+        animation: none !important
+    }
+    .ant-col.text-left.ant-col-xs-24.ant-col-lg-6>* {
+        position: relative !important;
+        z-index: 1 !important
+    }
+    /* Avatar wrapper hidden */
+    .ant-col.text-left.ant-col-xs-24.ant-col-lg-6>div:not(.mt-4) {
+        display: none !important
+    }
+    .ant-col.text-left.ant-col-xs-24.ant-col-lg-6>.mt-4:has(svg.lucide-messages-square) {
+        grid-column: 1 !important;
+        grid-row: 3 !important;
+        margin: 0 !important;
+        margin-bottom: -42px !important;
+        display: flex !important;
+        align-items: center !important;
+        flex-wrap: nowrap !important;
+        gap: 4px !important;
+        background: transparent !important;
+        padding-top: 20px !important;
+        max-width: 100% !important;
+        overflow: hidden !important
+    }
+    .ant-col.text-left.ant-col-xs-24.ant-col-lg-6>.mt-4:has(svg.lucide-messages-square)>.flex {
+        margin-left: 4px !important;
+        margin-right: 0 !important;
+        flex-shrink: 0 !important
+    }
+    .ant-col.text-left.ant-col-xs-24.ant-col-lg-6>.mt-4:has(.anticon-star) {
+        display: none !important
+    }
+    .ant-col.ant-col-xs-24.ant-col-lg-18 {
+        flex: 0 0 100% !important;
+        max-width: 100% !important;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+        overflow-x: hidden !important
+    }
+}
+
+/* ═══ AVATAR IMAGE STYLING — HIDDEN (only in header, not comments) ═══ */
+.ant-col-lg-6 > .ant-ribbon-wrapper .ant-image-img,
+.ant-col-lg-6 > div:not(.mt-4) .ant-image-img {
+    display: none !important
+}
+.ant-col-lg-6 > .ant-ribbon-wrapper:has(.ant-image),
+.ant-col-lg-6 > div:not(.mt-4):has(.ant-image) {
+    display: none !important
+}
+
+/* Avatar hidden on all sizes */
+
+/* ═══ ACTION BUTTON STYLING ═══ */
+
+/* All buttons in action bar */
+div.mt-4:has(svg.lucide-messages-square) button.ant-btn {
+    height: var(--co-height) !important;
+    margin: 0 !important;
+    padding: 0 14px !important;
+    border-radius: var(--co-radius-sm) !important;
+    border: 1px solid var(--co-glass-border) !important;
+    box-shadow: none !important;
+    font-size: 0.85em !important;
+    font-family: var(--co-font-body) !important;
+    font-weight: 500 !important;
+    text-transform: none !important;
+    letter-spacing: 0.02em !important;
+    min-width: 0 !important;
+    transform: none !important;
+    animation: none !important;
+    background: var(--co-surface) !important;
+    backdrop-filter: blur(16px) !important;
+    -webkit-backdrop-filter: blur(16px) !important;
+    color: var(--co-text-dim) !important;
+    transition: background .2s ease, color .2s ease, border-color .2s ease !important;
+    position: relative;
+    clip-path: none !important;
+    flex-shrink: 0 !important
+}
+div.mt-4:has(svg.lucide-messages-square) button.ant-btn::before { display: none !important }
+div.mt-4:has(svg.lucide-messages-square) button.ant-btn::after { display: none !important }
+div.mt-4:has(svg.lucide-messages-square) button.ant-btn>* { margin: 0 !important; padding: 0 !important }
+
+div.mt-4:has(svg.lucide-messages-square) button.ant-btn:hover {
+    filter: none !important;
+    background: var(--co-surface-hover) !important;
+    border-color: var(--co-accent) !important;
+    transform: none !important;
+    color: #fff !important;
+    box-shadow: 0 0 16px var(--co-accent-glow) !important
+}
+div.mt-4:has(svg.lucide-messages-square) button.ant-btn:active {
+    background: rgba(77, 166, 255, 0.15) !important;
+    box-shadow: none !important;
+    transition-duration: 0s !important
+}
+
+/* Chat With — fox fire gradient, pulsing glow */
+div.mt-4:has(svg.lucide-messages-square)>button.ant-btn:has(svg.lucide-messages-square) {
+    flex-shrink: 0 !important;
+    width: auto !important;
+    height: 50px !important;
+    background: linear-gradient(135deg, #a8d8ff, #4da6ff) !important;
+    color: #040810 !important;
+    font-weight: 700 !important;
+    font-size: 0.88em !important;
+    border: none !important;
+    clip-path: none !important;
+    padding: 0 24px !important;
+    border-radius: var(--co-radius-sm) !important;
+    box-shadow: 0 0 16px rgba(77, 166, 255, 0.4), 0 0 32px rgba(77, 166, 255, 0.15) !important;
+    animation: co-chatGlow 2.5s ease-in-out infinite !important
+}
+div.mt-4:has(svg.lucide-messages-square)>button.ant-btn:has(svg.lucide-messages-square) svg {
+    color: #040810 !important; stroke: #040810 !important
+}
+div.mt-4:has(svg.lucide-messages-square)>button.ant-btn:has(svg.lucide-messages-square)::before { display: none !important }
+div.mt-4:has(svg.lucide-messages-square)>button.ant-btn:has(svg.lucide-messages-square):hover {
+    transform: none !important;
+    background: linear-gradient(135deg, #d0ecff, #8ec8ff) !important;
+    color: #040810 !important;
+    box-shadow: 0 0 25px rgba(77, 166, 255, 0.6), 0 0 50px rgba(192, 224, 255, 0.2), 0 0 80px rgba(77, 166, 255, 0.1) !important;
+    animation: none !important
+}
+div.mt-4:has(svg.lucide-messages-square)>button.ant-btn:has(svg.lucide-messages-square):hover svg {
+    color: #fff !important; stroke: #fff !important
+}
+div.mt-4:has(svg.lucide-messages-square)>button.ant-btn:has(svg.lucide-messages-square):hover::before { display: none !important }
+
+/* Import + Download group */
+div.mt-4:has(svg.lucide-messages-square)>.flex {
+    display: flex !important;
+    flex-shrink: 0 !important;
+    align-items: center;
+    gap: 6px;
+    margin-left: 0 !important;
+    border-left: none !important;
+    border-radius: 0 !important;
+    overflow: visible !important
+}
+div.mt-4:has(svg.lucide-messages-square)>.flex>button.ant-btn:first-child {
+    flex-shrink: 0 !important;
+    overflow: hidden !important; clip-path: none !important
+}
+div.mt-4:has(svg.lucide-messages-square)>.flex>button.ant-btn svg {
+    stroke-width: 2.5px !important
+}
+div.mt-4:has(svg.lucide-messages-square)>.flex>button.ant-btn:first-child:hover { background: var(--co-surface-hover) !important }
+div.mt-4:has(svg.lucide-messages-square)>.flex>button.ant-btn:first-child::before { display: none !important }
+div.mt-4:has(svg.lucide-messages-square)>.flex>button.ant-btn:last-child {
+    flex-shrink: 0 !important; clip-path: none !important
+}
+div.mt-4:has(svg.lucide-messages-square)>.flex>button.ant-btn:last-child:hover { background: var(--co-surface-hover) !important }
+div.mt-4:has(svg.lucide-messages-square)>.flex>button.ant-btn:last-child::before { display: none !important }
+div.mt-4:has(svg.lucide-messages-square) button.ant-btn[aria-describedby] { display: none !important }
+
+/* Mobile: hide Import, icon-only Download, Chat button smaller */
+@media (max-width:640px) {
+    div.mt-4:has(svg.lucide-messages-square)>.flex>button.ant-btn:first-child { display: none !important }
+    div.mt-4:has(svg.lucide-messages-square)>.flex>button.ant-btn:last-child span:not(.ant-btn-icon):not(:has(svg)) { display: none !important }
+    div.mt-4:has(svg.lucide-messages-square)>.flex>button.ant-btn:last-child { padding: 0 10px !important; justify-content: center !important }
+    div.mt-4:has(svg.lucide-messages-square)>.flex { gap: 4px }
+    div.mt-4:has(svg.lucide-messages-square)>button.ant-btn:has(svg.lucide-messages-square) {
+        height: 38px !important;
+        padding: 0 12px !important;
+        font-size: 0.75em !important;
+        flex-shrink: 1 !important;
+        min-width: 0 !important;
+        overflow: hidden !important;
+        white-space: nowrap !important
+    }
+}
+
+/* Desktop: Import+Download — full text, normal size */
+@media (min-width:992px) {
+    div.mt-4:has(svg.lucide-messages-square)>.flex>button.ant-btn {
+        width: auto !important;
+        height: 50px !important;
+        padding: 0 14px !important;
+        flex-shrink: 0 !important
+    }
+    div.mt-4:has(svg.lucide-messages-square)>.flex {
+        gap: 6px !important
+    }
+
+    /* Badge — removed */
+    .ant-row.ant-row-center>.ant-col-lg-6:first-child>.mt-4:has(svg.lucide-messages-square)::after {
+        display: none !important
+    }
+}
+
+@keyframes co-badgeGlow {
+    0%, 100% {
+        box-shadow: 0 0 8px rgba(77, 166, 255, 0.15);
+        border-color: rgba(77, 166, 255, 0.35)
+    }
+    50% {
+        box-shadow: 0 0 16px rgba(77, 166, 255, 0.3), 0 0 30px rgba(77, 166, 255, 0.1);
+        border-color: rgba(77, 166, 255, 0.55)
+    }
+}
+
+/* ═══ FAVORITE BUTTON — IN THE ROW, PULSING ═══ */
+
+div.mt-4.text-right.justify-end {
+    background: transparent !important
+}
+
+div.mt-4.text-right.justify-end button.ant-btn:has(.anticon-star) {
+    border-radius: var(--co-radius-sm) !important;
+    overflow: visible !important;
+    padding: 0 14px !important;
+    min-width: 0 !important;
+    width: auto !important;
+    font-size: 0.78em !important;
+    font-family: var(--co-font-body) !important;
+    font-weight: 500 !important;
+    background: var(--co-surface) !important;
+    backdrop-filter: blur(16px) !important;
+    -webkit-backdrop-filter: blur(16px) !important;
+    border: 1px solid var(--co-glass-border) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    transition: background .2s ease, box-shadow .3s ease, border-color .2s ease !important;
+    clip-path: none !important
+}
+
+/* Favorited — gentle pulse, NO shapes behind */
+div.mt-4.text-right.justify-end button.ant-btn:has(.anticon-star svg path[d*="M664.8 561.6"]) {
+    color: var(--co-accent) !important;
+    background: rgba(77, 166, 255, 0.1) !important;
+    border-color: var(--co-accent) !important;
+    box-shadow: none !important;
+    animation: co-pulseGlow 2.5s ease-in-out infinite !important
+}
+div.mt-4.text-right.justify-end button.ant-btn:has(.anticon-star svg path[d*="M664.8 561.6"])::before { display: none !important }
+div.mt-4.text-right.justify-end button.ant-btn:has(.anticon-star svg path[d*="M664.8 561.6"])::after { display: none !important }
+div.mt-4.text-right.justify-end button.ant-btn:has(.anticon-star svg path[d*="M664.8 561.6"]):hover {
+    transform: none !important;
+    background: rgba(77, 166, 255, 0.18) !important;
+    box-shadow: 0 0 20px var(--co-accent-glow) !important
+}
+div.mt-4.text-right.justify-end button.ant-btn:has(.anticon-star svg path[d*="M664.8 561.6"]):hover::before { display: none !important }
+div.mt-4.text-right.justify-end button.ant-btn:has(.anticon-star svg path[d*="M664.8 561.6"]):active {
+    transform: scale(0.92) !important
+}
+
+/* Unfavorited */
+div.mt-4.text-right.justify-end button.ant-btn:has(.anticon-star):not(:has(path[d*="M664.8 561.6"])) {
+    color: var(--co-text-faint) !important;
+    background: var(--co-surface) !important;
+    border-color: var(--co-glass-border) !important;
+    box-shadow: none !important;
+    animation: none !important;
+    clip-path: none !important
+}
+div.mt-4.text-right.justify-end button.ant-btn:has(.anticon-star):not(:has(path[d*="M664.8 561.6"])):hover {
+    color: var(--co-accent-soft) !important;
+    background: rgba(77, 166, 255, 0.1) !important;
+    border-color: var(--co-accent) !important
+}
+div.mt-4.text-right.justify-end button.ant-btn:has(.anticon-star):not(:has(path[d*="M664.8 561.6"]))::before { display: none !important }
+div.mt-4.text-right.justify-end button.ant-btn:has(.anticon-star):not(:has(path[d*="M664.8 561.6"])):hover::before { display: none !important }
+div.mt-4.text-right.justify-end button.ant-btn:has(.anticon-star):not(:has(path[d*="M664.8 561.6"]))::after { display: none !important }
+
+/* ═══ GENERIC BUTTONS ═══ */
+button.ant-btn:not(:has(.anticon-question-circle)):not(:has(.anticon-star)) {
+    background: var(--co-surface) !important; border: 1px solid var(--co-glass-border) !important;
+    border-radius: var(--co-radius-sm) !important; color: var(--co-text) !important;
+    font-family: var(--co-font-body) !important; font-weight: 500 !important;
+    text-transform: none !important; letter-spacing: 0.01em !important;
+    position: relative !important; clip-path: none !important; transition: var(--co-btn-transition) !important
+}
+button.ant-btn:not(:has(.anticon-question-circle)):not(:has(.anticon-star))::before { display: none !important }
+button.ant-btn:not(:has(.anticon-question-circle)):not(:has(.anticon-star)):hover {
+    color: #fff !important; background: var(--co-surface-hover) !important;
+    border-color: var(--co-accent) !important
+}
+button.ant-btn:not(:has(.anticon-question-circle)):not(:has(.anticon-star)):hover::before { display: none !important }
+
+/* ═══════════════════════════════════════
+   PLATFORM LAYOUT OVERRIDES
+   ═══════════════════════════════════════ */
+
+div:has(> h4.ant-typography) { display: none !important }
+footer.ant-layout-footer { display: none !important }
+
+.ant-layout-header,
+.ant-menu-overflow-item.ant-menu-item.ant-menu-item-only-child.no-padding.ml-0.pl-0.mr-2,
+.ant-menu-overflow.ant-menu.ant-menu-root.ant-menu-horizontal.ant-menu-dark {
+    background-color: rgba(0, 0, 0, 0) !important;
+    border: none !important;
+    box-shadow: none !important
+}
+
+/* Fix white border line on horizontal nav */
+.ant-menu-horizontal {
+    border-bottom: none !important;
+    box-shadow: none !important
+}
+
+/* Fix sidebar background */
+.ant-menu.ant-menu-root.ant-menu-vertical,
+.ant-menu-vertical,
+.ant-layout-sider,
+.ant-layout-sider-dark,
+aside.ant-layout-sider {
+    background: transparent !important;
+    background-color: transparent !important;
+    border: none !important
+}
+
+.ant-menu-item:has(img[alt="logo"]) .ant-menu-title-content { display: flex !important; align-items: center }
+.ant-menu-item:has(img[alt="logo"]) img { margin-top: 2px }
+
+.ant-layout { margin-top: 0 !important }
+.ant-layout.abs-100-dvh {
+    height: auto !important; max-height: none !important; overflow: visible !important;
+    position: static !important; margin-top: 0 !important
+}
+
+header.ant-layout-header {
+    position: relative !important; z-index: 99999 !important;
+    height: auto !important; min-height: 60px !important; overflow: visible !important
+}
+
+div.ant-row:has(>:is(h3, h5).ant-typography) { display: none !important }
+
+div[length][color]:has(.msg-mkdn-container) {
+    max-height: none !important; overflow: visible !important; padding-top: 0 !important;
+    margin-top: 0 !important; background: transparent !important
+}
+
+.ant-col.ant-col-xs-24.ant-col-lg-18>.ant-row { padding-top: 0 !important; margin-top: 0 !important }
+
+div[length][color]:has(.msg-mkdn-container)::before,
+div[length][color]:has(.msg-mkdn-container)::after { display: none !important }
+div[length][color]:has(.msg-mkdn-container)~*,
+div[length][color]:has(.msg-mkdn-container)~spacer,
+div[length][color]:has(.msg-mkdn-container)+div:has(> spacer) { display: none !important }
+
+/* ═══ PLATFORM — DROPDOWNS ═══ */
+.ant-dropdown-placement-topLeft .ant-dropdown-menu.ant-dropdown-menu-vertical {
+    display: flex !important; flex-direction: row !important; gap: 0 !important;
+    padding: 0 !important; border-radius: var(--co-radius-sm) !important;
+    background: var(--co-btn-solid) !important; border: 1px solid var(--co-glass-border) !important
+}
+.ant-dropdown-placement-topLeft .ant-dropdown-menu.ant-dropdown-menu-vertical>.ant-dropdown-menu-item {
+    flex: 1 !important; text-align: center !important; justify-content: center !important
+}
+
+/* ═══ PLATFORM — COLLAPSE ═══ */
+.ant-collapse { border: none !important; background: transparent !important; border-radius: var(--co-radius) !important; overflow: hidden !important; margin-top: 12px !important; max-width: 100% !important }
+.ant-collapse>.ant-collapse-item {
+    border: none !important; border-bottom: 1px solid var(--co-glass-border) !important;
+    border-radius: 0 !important; background: var(--co-surface) !important;
+    backdrop-filter: blur(12px) !important; -webkit-backdrop-filter: blur(12px) !important;
+    overflow: hidden !important; max-width: 100% !important
+}
+.ant-collapse>.ant-collapse-item:last-child { border-bottom: none !important }
+.ant-collapse>.ant-collapse-item>.ant-collapse-header {
+    font-family: var(--co-font-body) !important; font-size: 1em !important; font-weight: 600 !important;
+    color: var(--co-accent-soft) !important; letter-spacing: 0.01em !important
+}
+.ant-collapse>.ant-collapse-item>.ant-collapse-header .ant-collapse-expand-icon { color: var(--co-accent-soft) !important }
+.ant-collapse-content { background: transparent !important; border-top: 1px solid var(--co-glass-border) !important; color: var(--co-text) !important; overflow: hidden !important; max-width: 100% !important }
+.ant-collapse-content-box { color: var(--co-text) !important; overflow: hidden !important; max-width: 100% !important }
+
+/* ═══ DISCUSSION / COMMENTS ═══ */
+.ant-comment {
+    background: transparent !important;
+    border-bottom: 1px solid var(--co-glass-border) !important;
+    padding: 16px 0 !important;
+    margin: 0 !important;
+    max-width: 100% !important;
+    overflow: hidden !important
+}
+.ant-comment:last-child { border-bottom: none !important }
+.ant-comment-avatar .ant-avatar {
+    border: 2px solid rgba(77, 166, 255, 0.3) !important;
+    border-radius: var(--co-radius-xs) !important
+}
+.ant-comment-content-author-name { font-weight: 700 !important; color: #fff !important; font-size: 0.9rem !important }
+.ant-comment-content-author-name a { color: #fff !important; text-decoration: none !important }
+.ant-comment-content-author-name a:hover { color: var(--co-accent) !important }
+.ant-comment-content-author-time { color: var(--co-text-faint) !important; font-size: 0.75rem !important }
+.ant-comment-content-detail {
+    color: var(--co-text-dim) !important; font-size: 0.9rem !important; line-height: 1.7 !important;
+    word-wrap: break-word !important; overflow-wrap: break-word !important
+}
+.ant-comment-content-detail p { margin: 0 0 8px !important }
+.ant-comment-content {
+    max-width: 100% !important; overflow: hidden !important; word-break: break-word !important
+}
+.ant-comment-actions > li { color: var(--co-text-faint) !important; font-size: 0.8rem !important }
+.ant-comment-actions > li:hover { color: var(--co-accent) !important }
+.ant-comment-actions > li > span { color: inherit !important }
+.ant-comment-nested {
+    margin-left: 44px !important;
+    border-left: 2px solid rgba(77, 166, 255, 0.15) !important;
+    padding-left: 16px !important
+}
+.ant-comment .ant-form-item { margin-bottom: 0 !important }
+.ant-comment textarea.ant-input {
+    background: rgba(255, 255, 255, 0.03) !important;
+    border: 1px solid var(--co-glass-border) !important;
+    border-radius: var(--co-radius-xs) !important;
+    color: var(--co-text) !important;
+    padding: 12px 16px !important;
+    resize: vertical !important;
+    min-height: 80px !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important
+}
+.ant-comment textarea.ant-input:focus {
+    border-color: var(--co-accent) !important;
+    box-shadow: 0 0 0 2px rgba(77, 166, 255, 0.1) !important
+}
+.ant-comment textarea.ant-input::placeholder { color: var(--co-text-faint) !important }
+
+/* Forms inside collapse */
+.ant-collapse .ant-form, .ant-collapse .ant-form-item,
+.ant-collapse .ant-space, .ant-collapse .ant-space-item {
+    max-width: 100% !important; box-sizing: border-box !important
+}
+
+.ant-collapse-content-box, .ant-collapse-content-box .ant-descriptions-item-content {
+    font-family: var(--co-font-mono) !important; font-size: 0.85em; color: var(--co-text) !important
+}
+.ant-collapse-content-box .ant-descriptions-item-label {
+    color: var(--co-text-dim) !important; font-family: var(--co-font-body) !important
+}
+.ant-collapse-content-box .ant-descriptions { background: transparent !important }
+.ant-collapse-content-box .ant-descriptions-view { border: none !important }
+.ant-collapse-content-box .ant-descriptions-row { border-bottom: 1px solid var(--co-glass-border) !important }
+.ant-collapse-content-box .ant-descriptions-item { background: transparent !important }
+
+/* ═══ PLATFORM — TAGS ═══ */
+.ant-tag {
+    font-size: 0.7em !important; padding: 0.2em 0.65em !important;
+    border-radius: 0 !important; background: var(--co-accent-glow) !important;
+    border: 1px solid rgba(77, 166, 255, 0.15) !important;
+    font-family: var(--co-font-body) !important; font-weight: 600 !important;
+    text-transform: uppercase !important; letter-spacing: 0.05em !important;
+    color: var(--co-accent-soft) !important; line-height: 1.6 !important;
+    transition: all .2s ease !important
+}
+.ant-tag:hover { background: rgba(77, 166, 255, 0.25) !important; color: #fff !important }
+
+.ant-space.ant-space-horizontal.ant-space-align-center {
+    max-height: none !important; overflow: visible !important; flex-wrap: wrap !important;
+    display: flex !important; flex-direction: row !important; gap: 6px !important
+}
+.ant-space.ant-space-horizontal.ant-space-align-center > .ant-space-item {
+    width: auto !important; flex: none !important
+}
+
+/* Created/Updated text — spacing above */
+div.mt-2 { margin-top: 24px !important }
+.ant-select-selection-overflow, .ant-select:has(.ant-select-selection-overflow) { display: none !important }
+
+#root, .ant-layout, .ant-layout-content, main.ant-layout-content {
+    background: transparent !important; position: relative; z-index: 1
+}
+
+/* ═══ KEYFRAMES — Fox Fire ═══ */
+@keyframes co-fadeUp {
+    from { opacity: 0; transform: translateY(30px) }
+    to { opacity: 1; transform: translateY(0) }
+}
+
+@keyframes co-pulseGlow {
+    0%, 100% { box-shadow: 0 0 6px rgba(77, 166, 255, 0.1) }
+    50% { box-shadow: 0 0 18px rgba(77, 166, 255, 0.2), 0 0 36px rgba(77, 166, 255, 0.06) }
+}
+
+@keyframes co-shimmer {
+    0% { background-position: -200% center }
+    100% { background-position: 200% center }
+}
+
+/* Smooth vertical float for ambient glow orbs */
+@keyframes co-glowFloat {
+    0%, 100% { transform: translateY(0) }
+    50% { transform: translateY(-8%) }
+}
+
+/* Chat button fox fire glow pulse */
+@keyframes co-chatGlow {
+    0%, 100% { box-shadow: 0 0 12px rgba(77, 166, 255, 0.3), 0 0 24px rgba(77, 166, 255, 0.1) }
+    50% { box-shadow: 0 0 25px rgba(77, 166, 255, 0.5), 0 0 50px rgba(192, 224, 255, 0.15), 0 0 80px rgba(77, 166, 255, 0.08) }
+}
+
+/* ═══ FOXFIRE — clockwise border sweep + sequencer ═══ */
+@keyframes co-borderSpin { from { transform: rotate(0deg) } to { transform: rotate(360deg) } }
+
+/* Visible only during the first slot of the global cycle (other cards are phase-shifted via negative delays) */
+@keyframes co-borderGate {
+    0%, 18% { opacity: 1 }
+    23%, 100% { opacity: 0 }
+}
+
+/* Irregular foxfire flicker (used on profile/scenario frames) */
+@keyframes co-foxfireFlicker {
+    0%, 100% { filter: drop-shadow(0 0 10px rgba(69,206,255,0.22)) }
+    22% { filter: drop-shadow(0 0 16px rgba(69,206,255,0.34)) drop-shadow(0 0 34px rgba(192,224,255,0.12)) }
+    48% { filter: drop-shadow(0 0 12px rgba(69,206,255,0.28)) drop-shadow(0 0 22px rgba(69,206,255,0.10)) }
+    73% { filter: drop-shadow(0 0 18px rgba(69,206,255,0.38)) drop-shadow(0 0 46px rgba(192,224,255,0.10)) }
+}
+
+/* Slow drifting haze inside frames */
+@keyframes co-foxfireWisp {
+    0%, 100% { transform: translate3d(0,0,0) scale(1); opacity: .55 }
+    50% { transform: translate3d(-2.5%, 2.8%, 0) scale(1.06); opacity: .85 }
+}
+
+/* ═══ FOX FIRE — border flicker, irregular like real flame ═══ */
+@keyframes co-foxFlicker {
+    0% {
+        border-color: rgba(69, 206, 255, 0.1);
+        box-shadow: 0 0 4px rgba(69, 206, 255, 0.08), 0 0 12px rgba(69, 206, 255, 0.03)
+    }
+    15% {
+        border-color: rgba(69, 206, 255, 0.35);
+        box-shadow: 0 0 8px rgba(69, 206, 255, 0.2), 0 0 22px rgba(69, 206, 255, 0.08), 0 0 45px rgba(69, 206, 255, 0.03)
+    }
+    30% {
+        border-color: rgba(69, 206, 255, 0.15);
+        box-shadow: 0 0 5px rgba(69, 206, 255, 0.1), 0 0 15px rgba(69, 206, 255, 0.04)
+    }
+    50% {
+        border-color: rgba(69, 206, 255, 0.45);
+        box-shadow: 0 0 10px rgba(69, 206, 255, 0.25), 0 0 30px rgba(69, 206, 255, 0.1), 0 0 55px rgba(69, 206, 255, 0.04)
+    }
+    65% {
+        border-color: rgba(69, 206, 255, 0.2);
+        box-shadow: 0 0 6px rgba(69, 206, 255, 0.12), 0 0 18px rgba(69, 206, 255, 0.05)
+    }
+    80% {
+        border-color: rgba(69, 206, 255, 0.38);
+        box-shadow: 0 0 9px rgba(69, 206, 255, 0.22), 0 0 28px rgba(69, 206, 255, 0.08), 0 0 50px rgba(69, 206, 255, 0.03)
+    }
+    100% {
+        border-color: rgba(69, 206, 255, 0.1);
+        box-shadow: 0 0 4px rgba(69, 206, 255, 0.08), 0 0 12px rgba(69, 206, 255, 0.03)
+    }
+}
+
+/* ═══ FOX FIRE — profile/preview breathing glow ═══ */
+@keyframes co-foxFirePulse {
+    0%, 100% {
+        box-shadow: 0 0 6px rgba(69, 206, 255, 0.1), 0 0 18px rgba(69, 206, 255, 0.04);
+        border-color: rgba(69, 206, 255, 0.15)
+    }
+    20% {
+        box-shadow: 0 0 12px rgba(69, 206, 255, 0.2), 0 0 35px rgba(69, 206, 255, 0.08), 0 0 60px rgba(69, 206, 255, 0.03);
+        border-color: rgba(69, 206, 255, 0.35)
+    }
+    45% {
+        box-shadow: 0 0 18px rgba(69, 206, 255, 0.3), 0 0 50px rgba(69, 206, 255, 0.12), 0 0 80px rgba(69, 206, 255, 0.04);
+        border-color: rgba(69, 206, 255, 0.5)
+    }
+    70% {
+        box-shadow: 0 0 10px rgba(69, 206, 255, 0.15), 0 0 28px rgba(69, 206, 255, 0.06);
+        border-color: rgba(69, 206, 255, 0.2)
+    }
+}
+
+/* Inner glow removed — clean static gradient instead */
+@keyframes co-foxInnerGlow {
+    0% { transform: translate(0%, 0%) }
+    100% { transform: translate(0%, 0%) }
+}
+
+/* ═══ FOX FIRE — bottom edge flicker ═══ */
+@keyframes co-foxEdgeFlame {
+    0%, 100% { opacity: 0.4 }
+    15% { opacity: 0.85 }
+    35% { opacity: 0.5 }
+    55% { opacity: 1 }
+    70% { opacity: 0.6 }
+    88% { opacity: 0.9 }
+}
+
+/* Fox fire border shimmer */
+@keyframes co-foxBorderShimmer {
+    0%, 100% { opacity: 0.3 }
+    50% { opacity: 0.8 }
+}
+
+@keyframes co-swipeHint {
+    0%, 100% { opacity: 0.3; letter-spacing: 0.08em }
+    50% { opacity: 0.6; letter-spacing: 0.14em }
+}
+
+/* ═══════════════════════════════════════
+   CUSTOM DESIGN — PAGE STRUCTURE
+   ═══════════════════════════════════════ */
+
+/* Background image — hidden, replaced by pure CSS background on body */
+.co-bg { display: none !important }
+
+/* Mobile: prevent overscroll bounce and horizontal overflow */
+@media (max-width:991px) {
+    html, body {
+        overscroll-behavior: none !important;
+        overflow-x: hidden !important
+    }
+}
+
+/* Page wrapper */
+.co-page {
+    width: 100%; max-width: var(--co-page-width); margin: 0 auto;
+    padding: 0 16px; position: relative; z-index: 2
+}
+
+/* ═══ HEADER BANNER — hidden, now on platform container ═══ */
+.co-header { display: none !important }
+.co-header-img { display: none !important }
+.co-header-fade { display: none !important }
+
+/* ═══ CHARACTER NAME — hidden, now pseudo-element on avatar ═══ */
+.co-name { display: none !important }
+
+/* ═══ CARDS — Fox Fire Design ═══ */
+.co-card{
+    background: linear-gradient(165deg,#0c1628 0%,#091020 45%,#070d1a 100%);
+    border: 1px solid rgba(69,206,255,0.14);
+    border-radius: 0;
+    padding: 24px;
+    margin-top: 16px;
+    box-shadow: none !important; /* remove outer glow/shadow */
+    position: relative;
+    overflow: hidden;
+    animation: co-fadeUp .6s ease both
+}
+/* Content above FX */
+.co-card>*{position:relative;z-index:2}
+
+/* Default: no animated sweep unless enabled via selectors below */
+.co-card::before{
+    content:'';
+    position:absolute;
+    inset:0;
+    padding: var(--co-border-w);
+    border-radius: inherit;
+    background: conic-gradient(from 0deg,
+        rgba(69,206,255,0) 0deg,
+        rgba(69,206,255,0) 250deg,
+        var(--foxfire-blue-soft) 300deg,
+        var(--foxfire-blue) 322deg,
+        var(--foxfire-core) 340deg,
+        rgba(69,206,255,0) 360deg);
+    opacity: 0;
+    pointer-events:none;
+    z-index:1;
+
+    /* show ONLY the border (mask out the center) */
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+
+    filter: drop-shadow(0 0 10px rgba(69,206,255,0.22))
+}
+/* Soft inner sheen (no outer glow) */
+.co-card::after{
+    content:'';
+    position:absolute;
+    inset:0;
+    background:
+        radial-gradient(1200px 420px at 20% 0%, rgba(69,206,255,0.07), transparent 55%),
+        radial-gradient(900px 380px at 90% 10%, rgba(192,224,255,0.05), transparent 60%),
+        linear-gradient(180deg, rgba(255,255,255,0.03), transparent 35%);
+    opacity: .85;
+    pointer-events:none;
+    z-index:0
+}
+.co-card-label {
+    font-family: var(--co-font-body); font-size: 0.7em; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.12em; color: var(--co-accent-soft);
+    margin: 0 0 12px 0; display: flex; align-items: center; gap: 8px
+}
+.co-card-label::before {
+    content: ''; width: 3px; height: 14px; border-radius: 0;
+    background: linear-gradient(to bottom, #4da6ff, #45ceff);
+    flex-shrink: 0;
+    box-shadow: 0 0 8px rgba(69, 206, 255, 0.35)
+}
+
+.co-card p {
+    font-family: var(--co-font-body); font-size: 0.92em; font-weight: 400;
+    color: var(--co-text); line-height: 1.7; margin: 0
+}
+
+/* ═══ SEQUENCED BORDER SWEEP (clockwise) ═══ */
+/* Order: About → Creator's Note → Feedback → Credits */
+.co-card-row .co-right-stack > .co-card:nth-child(1)::before{
+    opacity: 1;
+    animation: co-borderSpin var(--co-seq-slot) linear infinite, co-borderGate var(--co-seq-cycle) linear infinite;
+    animation-delay: 0s, 0s
+}
+.co-card-row .co-right-stack > .co-card:nth-child(2)::before{
+    opacity: 1;
+    animation: co-borderSpin var(--co-seq-slot) linear infinite, co-borderGate var(--co-seq-cycle) linear infinite;
+    animation-delay: -4s, -4s
+}
+.co-card-row .co-right-stack > .co-card:nth-child(3)::before{
+    opacity: 1;
+    animation: co-borderSpin var(--co-seq-slot) linear infinite, co-borderGate var(--co-seq-cycle) linear infinite;
+    animation-delay: -8s, -8s
+}
+.co-credits::before{
+    opacity: 1;
+    animation: co-borderSpin var(--co-seq-slot) linear infinite, co-borderGate var(--co-seq-cycle) linear infinite;
+    animation-delay: -12s, -12s
+}
+
+/* ═══ PROFILE IMAGE BOX — Fox Fire Glow ═══ */
+.co-profile-box{
+    padding: 0 !important;
+    overflow: hidden;
+    border: 1px solid rgba(69,206,255,0.18) !important;
+    border-radius: 0 !important;
+    animation: co-fadeUp .6s ease both !important
+}
+/* Foxfire border sweep (constant) */
+.co-profile-box::before{
+    opacity: .85 !important;
+    animation: co-borderSpin 6.5s linear infinite, co-foxfireFlicker 3.2s ease-in-out infinite !important
+}
+/* Foxfire haze inside the image frame */
+.co-profile-box::after{
+    content:'';
+    position:absolute;
+    inset:-12%;
+    background:
+        radial-gradient(closest-side at 18% 22%, rgba(69,206,255,0.26), transparent 62%),
+        radial-gradient(closest-side at 78% 68%, rgba(192,224,255,0.18), transparent 58%),
+        radial-gradient(closest-side at 62% 18%, rgba(69,206,255,0.14), transparent 60%);
+    filter: blur(18px);
+    mix-blend-mode: screen;
+    opacity: .55;
+    pointer-events:none;
+    z-index:1;
+    animation: co-foxfireWisp 5.8s ease-in-out infinite
+}
+.co-profile-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
+    filter: saturate(1.05) contrast(1.06) brightness(1.02)
+}
+
+/* About divider removed */
+
+/* ═══ SCENARIOS — TWO-BOX LAYOUT WITH HOVER PREVIEW ═══ */
+.co-sc-row {
+    display: flex; gap: 16px; margin-top: 16px
+}
+
+/* Preview box — left 33%, fox fire glow */
+.co-sc-preview-box{
+    flex: 0 0 33%;
+    max-width: 33%;
+    margin-top: 0;
+    padding: 12px !important;
+    overflow: hidden;
+    display: flex;
+    align-items: stretch;
+    box-shadow: none !important;
+    animation: co-fadeUp .6s ease both !important
+}
+/* Foxfire border sweep + flicker */
+.co-sc-preview-box::before{
+    opacity: .78 !important;
+    animation: co-borderSpin 7.2s linear infinite, co-foxfireFlicker 3.6s ease-in-out infinite !important
+}
+.co-sc-preview-box::after{
+    content:'';
+    position:absolute;
+    inset:0;
+    background:
+        radial-gradient(closest-side at 30% 18%, rgba(69,206,255,0.18), transparent 62%),
+        radial-gradient(closest-side at 70% 75%, rgba(192,224,255,0.12), transparent 58%),
+        linear-gradient(180deg, rgba(69,206,255,0.06), transparent 45%);
+    filter: blur(14px);
+    mix-blend-mode: screen;
+    opacity: .45;
+    pointer-events:none;
+    z-index:1;
+    animation: co-foxfireWisp 7.4s ease-in-out infinite
+}
+.co-sc-imgwrap {
+    position: relative; width: 100%; min-height: 750px;
+    background: rgba(8, 12, 22, 0.95); overflow: hidden
+}
+.co-sc-placeholder {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--co-font-body); font-size: 0.9em; font-weight: 500;
+    color: var(--co-text-dim); letter-spacing: 0.02em;
+    transition: opacity 0.3s ease;
+    z-index: 1
+}
+.co-sc-pimg {
+    position: absolute; inset: 0; width: 100%; height: 100%;
+    object-fit: cover; object-position: center top;
+    opacity: 0; transition: opacity 0.4s ease;
+    z-index: 2
+}
+
+/* Hide placeholder when any entry is hovered */
+.co-sc-row:has(.co-sc-entry:hover) .co-sc-placeholder { opacity: 0 }
+
+/* Show matching image — explicit class targeting */
+.co-sc-row:has(.sc-ent-1:hover) .sc-img-1 { opacity: 1 }
+.co-sc-row:has(.sc-ent-2:hover) .sc-img-2 { opacity: 1 }
+.co-sc-row:has(.sc-ent-3:hover) .sc-img-3 { opacity: 1 }
+.co-sc-row:has(.sc-ent-4:hover) .sc-img-4 { opacity: 1 }
+.co-sc-row:has(.sc-ent-5:hover) .sc-img-5 { opacity: 1 }
+
+/* List box — right, with label */
+.co-sc-list-box {
+    flex: 1; margin-top: 0; padding: 0 !important; overflow: hidden;
+    display: flex; flex-direction: column
+}
+.co-sc-list-box::before{
+    opacity: .55 !important;
+    animation: co-borderSpin 9s linear infinite, co-foxfireFlicker 4.2s ease-in-out infinite !important
+}
+.co-sc-list-box .co-card-label {
+    padding: 24px 24px 14px; flex-shrink: 0
+}
+
+/* Entries container — fills remaining height */
+.co-sc-entries {
+    flex: 1; display: flex; flex-direction: column
+}
+
+.co-sc-entry {
+    flex: 1; display: flex; align-items: center; gap: 16px;
+    padding: 0 24px;
+    border-bottom: 1px solid rgba(180, 220, 255, 0.06);
+    cursor: default;
+    transition: background 0.25s ease, border-color 0.25s ease, padding 0.25s ease
+}
+.co-sc-entry:last-child { border-bottom: none }
+.co-sc-entry:hover {
+    background: linear-gradient(90deg, rgba(77, 166, 255, 0.08) 0%, rgba(192, 224, 255, 0.02) 60%, transparent 100%);
+    border-left: 2px solid rgba(77, 166, 255, 0.6);
+    padding-left: 22px;
+    box-shadow: inset 4px 0 20px rgba(77, 166, 255, 0.06), 0 0 15px rgba(77, 166, 255, 0.04)
+}
+
+.co-sc-num {
+    font-family: var(--co-font-mono); font-size: 0.85em; font-weight: 700;
+    color: var(--co-accent-soft); min-width: 28px;
+    opacity: 0.65; transition: opacity 0.25s ease
+}
+.co-sc-entry:hover .co-sc-num { opacity: 1 }
+
+.co-sc-etext { flex: 1; min-width: 0 }
+.co-sc-etext h4 {
+    font-family: var(--co-font-display); font-size: 1.02em; font-weight: 700;
+    color: var(--co-text); margin: 0 0 3px; line-height: 1.3;
+    transition: color 0.25s ease
+}
+.co-sc-entry:hover .co-sc-etext h4 { color: var(--co-accent-soft) }
+.co-sc-etext p {
+    font-size: 0.9em; color: var(--co-text-dim); margin: 0; line-height: 1.5
+}
+
+/* Mobile scenarios */
+@media (max-width: 640px) {
+    .co-sc-row { flex-direction: column; gap: 12px }
+    .co-sc-preview-box { display: none !important }
+    .co-sc-entries { min-height: auto }
+    .co-sc-entry { padding: 14px 16px }
+    .co-sc-entry:hover { padding-left: 14px }
+}
+
+/* ═══ PRESET BANNER — standalone hidden, now inside Creator's Note ═══ */
+.co-preset-link { display: none !important }
+
+/* Inline preset button — styled like co-btn */
+.co-preset-inline {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    margin-top: 14px; padding: 10px 28px; border-radius: 0;
+    background: transparent;
+    border: 1px solid rgba(77, 166, 255, 0.35);
+    text-decoration: none; color: var(--co-accent-soft); font-family: var(--co-font-body);
+    font-size: 0.85em; font-weight: 600; letter-spacing: 0.03em;
+    transition: var(--co-btn-transition); box-shadow: none
+}
+.co-preset-inline:hover {
+    transform: translateY(-2px); color: #fff; opacity: 1;
+    background: linear-gradient(135deg, rgba(77, 166, 255, 0.12), rgba(192, 224, 255, 0.08));
+    border-color: #4da6ff;
+    box-shadow: 0 0 12px rgba(77, 166, 255, 0.2), 0 4px 20px rgba(77, 166, 255, 0.1), inset 0 0 15px rgba(77, 166, 255, 0.04)
+}
+.co-preset-inline span { position: relative; z-index: 1 }
+
+/* ═══ FEEDBACK ═══ */
+.co-feedback { animation: co-fadeUp .6s ease .35s both }
+.co-right-stack .co-feedback { text-align: left }
+.co-feedback p { color: var(--co-text-dim); margin-bottom: 12px !important }
+
+.co-btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    padding: 10px 28px; border-radius: 0;
+    background: transparent;
+    color: var(--co-accent-soft); font-family: var(--co-font-body); font-size: 0.85em;
+    font-weight: 600; text-decoration: none; letter-spacing: 0.03em;
+    transition: var(--co-btn-transition);
+    border: 1px solid rgba(77, 166, 255, 0.35);
+    box-shadow: none
+}
+.co-btn:hover {
+    transform: translateY(-2px); color: #fff; opacity: 1;
+    background: linear-gradient(135deg, rgba(77, 166, 255, 0.12), rgba(192, 224, 255, 0.08));
+    border-color: #4da6ff;
+    box-shadow: 0 0 12px rgba(77, 166, 255, 0.2), 0 4px 20px rgba(77, 166, 255, 0.1), inset 0 0 15px rgba(77, 166, 255, 0.04)
+}
+
+/* ═══ CARD ROW — Profile 1/3 + About/Note 2/3 ═══ */
+.co-card-row {
+    display: flex; gap: 16px; margin-top: 16px
+}
+.co-card-row .co-profile-box {
+    flex: 0 0 33%; max-width: 33%; margin-top: 0
+}
+.co-card-row .co-right-stack {
+    flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 16px
+}
+.co-card-row .co-right-stack .co-card {
+    flex: 1; margin-top: 0; min-width: 0; display: flex; flex-direction: column; justify-content: center
+}
+
+@media (max-width: 640px) {
+    .co-card-row { flex-direction: column; gap: 12px }
+    .co-card-row .co-profile-box { flex: none; max-width: 100% }
+    .co-card-row .co-profile-box .co-profile-img { max-height: 300px }
+}
+
+/* ═══ CREDITS ═══ */
+.co-credits { animation: co-fadeUp .6s ease .4s both }
+.co-credits-grid {
+    display: flex; gap: 16px; margin-top: 8px
+}
+
+.co-credit {
+    flex: 1; display: flex; align-items: center; gap: 14px;
+    padding: 14px 16px; border-radius: var(--co-radius-sm);
+    background: var(--co-glass); border: 1px solid var(--co-glass-border);
+    transition: background .25s ease, border-color .25s ease;
+    text-decoration: none
+}
+.co-credit:hover {
+    background: rgba(77, 166, 255, 0.05);
+    border-color: rgba(77, 166, 255, 0.2);
+    box-shadow: 0 0 15px rgba(77, 166, 255, 0.08), inset 0 0 12px rgba(77, 166, 255, 0.03);
+    opacity: 1
+}
+
+.co-credit-avatar {
+    width: 44px; height: 44px; border-radius: 0;
+    object-fit: cover; flex-shrink: 0;
+    border: 2px solid var(--co-glass-border)
+}
+
+.co-credit-info { min-width: 0 }
+.co-credit-name {
+    font-family: var(--co-font-display); font-size: 0.88em; font-weight: 700;
+    color: var(--co-text); line-height: 1.3
+}
+.co-credit-role {
+    font-family: var(--co-font-body); font-size: 0.75em; font-weight: 400;
+    color: var(--co-text-dim); line-height: 1.4
+}
+
+@media (max-width: 640px) {
+    .co-credits-grid { flex-direction: column; gap: 10px }
+    .co-credit { padding: 12px 14px; gap: 12px }
+    .co-credit-avatar { width: 38px; height: 38px }
+}
+
+/* ═══ SERIES BANNER — hidden ═══ */
+.co-series { display: none !important }
+.co-series:hover {
+    border-color: rgba(77, 166, 255, 0.2); opacity: 1
+}
+.co-series-banner {
+    position: relative; overflow: hidden;
+    border-radius: var(--co-radius-sm);
+    margin-top: 4px; height: 160px
+}
+.co-series-img {
+    width: 100%; height: 100%; object-fit: cover; object-position: center 20%;
+    display: block; filter: brightness(0.65);
+    transition: filter .3s ease, transform .4s ease
+}
+.co-series:hover .co-series-img {
+    filter: brightness(0.8); transform: scale(1.03)
+}
+.co-series-overlay {
+    position: absolute; inset: 0; display: flex;
+    align-items: center; justify-content: center;
+    background: linear-gradient(to top, rgba(10, 15, 26, 0.5) 0%, rgba(10, 15, 26, 0.15) 100%)
+}
+.co-series-title {
+    font-family: var(--co-font-display); font-size: 1.4em; font-weight: 900;
+    color: #fff; margin: 0; letter-spacing: 0.02em;
+    text-shadow: 0 2px 16px rgba(0, 0, 0, 0.6)
+}
+
+@media (max-width: 640px) {
+    .co-series-banner { height: 120px }
+    .co-series-title { font-size: 1.15em }
+}
+
+/* ═══ DISCLAIMER ═══ */
+.co-disclaimer {
+    margin-top: 24px;
+    text-align: center;
+    font-family: var(--co-font-body);
+    font-size: 0.75em;
+    color: var(--co-text-faint);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    opacity: 0.7
+}
+
+/* ═══════════════════════════════════════
+   MOBILE + GLOBAL PLATFORM FIXES
+   ═══════════════════════════════════════ */
+
+@media (max-width: 991px) {
+    .ant-row.ant-row-center {
+        padding-left: 10px !important;
+        padding-right: 10px !important
+    }
+    .co-page { padding: 0 10px }
+}
+
+@media (max-width: 768px) {
+    .ant-col.ant-col-xs-24.ant-col-lg-18 { overflow-x: hidden !important }
+    .ant-collapse, .ant-collapse-content, .ant-collapse-content-box {
+        max-width: 100% !important;
+        box-sizing: border-box !important
+    }
+    .ant-row.ant-row-center {
+        overflow-x: hidden !important
+    }
+}
+
+/* ═══ TINY PHONES ═══ */
+@media (max-width: 480px) {
+    .ant-comment-nested {
+        margin-left: 12px !important;
+        padding-left: 8px !important
+    }
+    .ant-comment-avatar { margin-right: 10px !important }
+    .ant-comment-avatar .ant-avatar { width: 32px !important; height: 32px !important }
+}

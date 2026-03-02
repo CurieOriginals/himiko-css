@@ -1142,7 +1142,7 @@ div.mt-2 {
 /* Inline preset button — styled like co-btn */
 .co-preset-inline {
     display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-    margin-top: 14px; padding: 10px 28px; border-radius: 0;
+    margin-top: auto; padding: 10px 28px; border-radius: 0;
     background: transparent;
     border: 1px solid rgba(77, 166, 255, 0.35);
     text-decoration: none; color: var(--co-accent-soft); font-family: var(--co-font-body);
@@ -1161,6 +1161,7 @@ div.mt-2 {
 .co-feedback { animation: co-fadeUp .6s ease .35s both, co-heartbeatR 12s ease-in-out infinite !important }
 .co-right-stack .co-feedback { text-align: left }
 .co-feedback p { color: var(--co-text-dim); margin-bottom: 12px !important }
+.co-feedback .co-btn { margin-top: auto }
 
 .co-btn {
     display: inline-flex; align-items: center; justify-content: center; gap: 8px;

@@ -125,9 +125,8 @@ div.mt-4 { background: transparent !important; background-color: transparent !im
         border-radius: var(--co-radius) !important;
         background: url('https://curie-assets.site/images/Himiko_Header.webp') center 40% / cover no-repeat !important;
         box-sizing: border-box !important;
-        border-left: 3px solid rgba(69, 206, 255, 0.15) !important;
-        border-right: 3px solid rgba(69, 206, 255, 0.15) !important;
-        animation: co-heartbeatLR 12s ease-in-out infinite !important
+        border: 3px solid rgba(69, 206, 255, 0.15) !important;
+        animation: co-heartbeat 12s ease-in-out infinite !important
     }
 
     /* Gradient fade overlay */
@@ -238,9 +237,8 @@ div.mt-4 { background: transparent !important; background-color: transparent !im
         margin-bottom: 72px !important;
         border-radius: var(--co-radius) !important;
         background: url('https://curie-assets.site/images/Himiko_Header.webp') center 40% / cover no-repeat !important;
-        border-left: 3px solid rgba(69, 206, 255, 0.15) !important;
-        border-right: 3px solid rgba(69, 206, 255, 0.15) !important;
-        animation: co-heartbeatLR 12s ease-in-out infinite !important
+        border: 3px solid rgba(69, 206, 255, 0.15) !important;
+        animation: co-heartbeat 12s ease-in-out infinite !important
     }
     .ant-col.text-left.ant-col-xs-24.ant-col-lg-6::before {
         content: '' !important;
@@ -767,74 +765,32 @@ div.mt-2 {
     50% { box-shadow: 0 0 20px rgba(69, 206, 255, 0.5), 0 0 45px rgba(69, 206, 255, 0.15) }
 }
 
-/* ═══ HEARTBEAT LEFT — border-left only ═══ */
-@keyframes co-heartbeatL {
-    0%        { border-left-color: rgba(69, 206, 255, 0.15) }
-    2%        { border-left-color: #45ceff }
-    4%        { border-left-color: rgba(69, 206, 255, 0.3) }
-    6%        { border-left-color: #45ceff }
-    8%, 25%   { border-left-color: #45ceff }
-    27%       { border-left-color: #fff }
-    29%       { border-left-color: rgba(200, 230, 255, 0.5) }
-    31%       { border-left-color: #fff }
-    33%, 50%  { border-left-color: #fff }
-    52%       { border-left-color: #38b7ff }
-    54%       { border-left-color: rgba(56, 183, 255, 0.4) }
-    56%       { border-left-color: #38b7ff }
-    58%, 75%  { border-left-color: #38b7ff }
-    77%       { border-left-color: rgba(69, 206, 255, 0.15) }
-    79%       { border-left-color: rgba(56, 183, 255, 0.3) }
-    81%       { border-left-color: rgba(69, 206, 255, 0.15) }
-    83%, 100% { border-left-color: rgba(69, 206, 255, 0.15) }
+/* ═══ HEARTBEAT — ONE animation, border-color shorthand = all 4 sides ═══ */
+/* Elements control which sides are visible via border-width */
+@keyframes co-heartbeat {
+    0%        { border-color: rgba(69, 206, 255, 0.15) }
+    2%        { border-color: #45ceff }
+    4%        { border-color: rgba(69, 206, 255, 0.3) }
+    6%        { border-color: #45ceff }
+    8%, 25%   { border-color: #45ceff }
+    27%       { border-color: #fff }
+    29%       { border-color: rgba(200, 230, 255, 0.5) }
+    31%       { border-color: #fff }
+    33%, 50%  { border-color: #fff }
+    52%       { border-color: #38b7ff }
+    54%       { border-color: rgba(56, 183, 255, 0.4) }
+    56%       { border-color: #38b7ff }
+    58%, 75%  { border-color: #38b7ff }
+    77%       { border-color: rgba(69, 206, 255, 0.15) }
+    79%       { border-color: rgba(56, 183, 255, 0.3) }
+    81%       { border-color: rgba(69, 206, 255, 0.15) }
+    83%, 100% { border-color: rgba(69, 206, 255, 0.15) }
 }
 
-/* ═══ HEARTBEAT RIGHT — border-right only ═══ */
-@keyframes co-heartbeatR {
-    0%        { border-right-color: rgba(69, 206, 255, 0.15) }
-    2%        { border-right-color: #45ceff }
-    4%        { border-right-color: rgba(69, 206, 255, 0.3) }
-    6%        { border-right-color: #45ceff }
-    8%, 25%   { border-right-color: #45ceff }
-    27%       { border-right-color: #fff }
-    29%       { border-right-color: rgba(200, 230, 255, 0.5) }
-    31%       { border-right-color: #fff }
-    33%, 50%  { border-right-color: #fff }
-    52%       { border-right-color: #38b7ff }
-    54%       { border-right-color: rgba(56, 183, 255, 0.4) }
-    56%       { border-right-color: #38b7ff }
-    58%, 75%  { border-right-color: #38b7ff }
-    77%       { border-right-color: rgba(69, 206, 255, 0.15) }
-    79%       { border-right-color: rgba(56, 183, 255, 0.3) }
-    81%       { border-right-color: rgba(69, 206, 255, 0.15) }
-    83%, 100% { border-right-color: rgba(69, 206, 255, 0.15) }
-}
-
-/* ═══ HEARTBEAT BOTH — border-left + border-right ═══ */
-@keyframes co-heartbeatLR {
-    0%        { border-left-color: rgba(69, 206, 255, 0.15); border-right-color: rgba(69, 206, 255, 0.15) }
-    2%        { border-left-color: #45ceff; border-right-color: #45ceff }
-    4%        { border-left-color: rgba(69, 206, 255, 0.3); border-right-color: rgba(69, 206, 255, 0.3) }
-    6%        { border-left-color: #45ceff; border-right-color: #45ceff }
-    8%, 25%   { border-left-color: #45ceff; border-right-color: #45ceff }
-    27%       { border-left-color: #fff; border-right-color: #fff }
-    29%       { border-left-color: rgba(200, 230, 255, 0.5); border-right-color: rgba(200, 230, 255, 0.5) }
-    31%       { border-left-color: #fff; border-right-color: #fff }
-    33%, 50%  { border-left-color: #fff; border-right-color: #fff }
-    52%       { border-left-color: #38b7ff; border-right-color: #38b7ff }
-    54%       { border-left-color: rgba(56, 183, 255, 0.4); border-right-color: rgba(56, 183, 255, 0.4) }
-    56%       { border-left-color: #38b7ff; border-right-color: #38b7ff }
-    58%, 75%  { border-left-color: #38b7ff; border-right-color: #38b7ff }
-    77%       { border-left-color: rgba(69, 206, 255, 0.15); border-right-color: rgba(69, 206, 255, 0.15) }
-    79%       { border-left-color: rgba(56, 183, 255, 0.3); border-right-color: rgba(56, 183, 255, 0.3) }
-    81%       { border-left-color: rgba(69, 206, 255, 0.15); border-right-color: rgba(69, 206, 255, 0.15) }
-    83%, 100% { border-left-color: rgba(69, 206, 255, 0.15); border-right-color: rgba(69, 206, 255, 0.15) }
-}
-
-/* ═══ PROFILE — Fox fire gradient glow pulse (white inner border always solid) ═══ */
+/* ═══ PROFILE — Fox fire gradient glow pulse ═══ */
 @keyframes co-foxFirePulse {
     0%, 100% {
         box-shadow:
-            inset 0 0 0 2px #fff,
             0 -4px 8px -1px rgba(56, 183, 255, 0.5),
             -4px 0 8px -1px rgba(56, 183, 255, 0.4),
             0 0 4px rgba(255, 255, 255, 0.3),
@@ -843,7 +799,6 @@ div.mt-2 {
     }
     50% {
         box-shadow:
-            inset 0 0 0 2px #fff,
             0 -8px 14px -2px #38b7ff,
             -8px 0 14px -2px rgba(56, 183, 255, 0.8),
             0 0 8px rgba(255, 255, 255, 0.6),
@@ -916,45 +871,27 @@ div.mt-2 {
 /* ═══ CHARACTER NAME — hidden, now pseudo-element on avatar ═══ */
 .co-name { display: none !important }
 
-/* ═══ CARDS — Clean dark, neutral borders ═══ */
+/* ═══ CARDS — Clean dark ═══ */
 .co-card {
     background: linear-gradient(165deg, #0c1628 0%, #091020 45%, #070d1a 100%); 
     border: 1px solid rgba(69, 206, 255, 0.08);
+    border-color: rgba(69, 206, 255, 0.15);
     border-radius: 0; padding: 24px; margin-top: 16px;
     box-shadow: 0 0 12px rgba(0, 0, 0, 0.4);
-    animation: co-fadeUp .6s ease both;
+    animation: co-fadeUp .6s ease both, co-heartbeat 12s ease-in-out infinite;
     position: relative;
     overflow: hidden
+}
+/* Right-stack cards: 3px right border */
+.co-right-stack > .co-card {
+    border-width: 1px 3px 1px 1px
 }
 .co-card::before { display: none }
 .co-card::after { display: none }
 .co-card > * { position: relative; z-index: 1 }
 
-/* ═══ HEARTBEAT POSITIONS ═══ */
+/* ═══ HEARTBEAT — applied per-element below, controls which sides show ═══ */
 
-/* RIGHT border: About, Creator's Note, Feedback */
-.co-right-stack > .co-card {
-    border-right: 3px solid rgba(69, 206, 255, 0.15);
-    animation: co-fadeUp .6s ease both, co-heartbeatR 12s ease-in-out infinite
-}
-
-/* RIGHT border: Scenarios list box */
-.co-sc-list-box {
-    border-right: 3px solid rgba(69, 206, 255, 0.15) !important;
-    animation: co-fadeUp .6s ease both, co-heartbeatR 12s ease-in-out infinite !important
-}
-
-/* LEFT border: Profile box */
-.co-profile-box {
-    border-left: 3px solid rgba(69, 206, 255, 0.15) !important;
-    animation: co-foxFirePulse 4s ease-in-out infinite, co-heartbeatL 12s ease-in-out infinite !important
-}
-
-/* LEFT border: Scenario preview box */
-.co-sc-preview-box {
-    border-left: 3px solid rgba(69, 206, 255, 0.15) !important;
-    animation: co-previewPulse 4s ease-in-out infinite, co-heartbeatL 12s ease-in-out infinite !important
-}
 .co-card:nth-child(3) { animation-delay: .15s }
 .co-card:nth-child(4) { animation-delay: .2s }
 .co-card:nth-child(5) { animation-delay: .25s }
@@ -976,19 +913,21 @@ div.mt-2 {
     color: var(--co-text); line-height: 1.7; margin: 0
 }
 
-/* ═══ PROFILE IMAGE BOX — Solid white inner border + fox fire glow ═══ */
+/* ═══ PROFILE IMAGE BOX — Fox fire glow + heartbeat left ═══ */
 .co-profile-box {
     padding: 0 !important; overflow: hidden;
-    border: none !important;
-    border-left: 3px solid rgba(69, 206, 255, 0.15) !important;
+    border: 1px solid rgba(69, 206, 255, 0.15) !important;
+    border-width: 1px 1px 1px 3px !important;
+    border-color: rgba(69, 206, 255, 0.15) !important;
+    outline: 2px solid #fff !important;
+    outline-offset: -2px !important;
     box-shadow:
-        inset 0 0 0 2px #fff,
         0 -6px 12px -2px #38b7ff,
         -6px 0 12px -2px rgba(56, 183, 255, 0.7),
         0 0 6px rgba(255, 255, 255, 0.5),
         0 6px 12px -2px #45ceff,
-        -6px 0 8px -2px rgba(69, 206, 255, 0.6);
-    animation: co-foxFirePulse 4s ease-in-out infinite, co-heartbeatL 12s ease-in-out infinite !important
+        6px 0 8px -2px rgba(69, 206, 255, 0.6) !important;
+    animation: co-foxFirePulse 4s ease-in-out infinite, co-heartbeat 12s ease-in-out infinite !important
 }
 .co-profile-box::before { display: none !important }
 .co-profile-box::after { display: none !important }
@@ -1004,13 +943,14 @@ div.mt-2 {
     display: flex; gap: 16px; margin-top: 16px
 }
 
-/* Preview box — left 33%, fox fire pulse + heartbeat left */
+/* Preview box — left 33%, fox fire pulse + heartbeat */
 .co-sc-preview-box {
     flex: 0 0 33%; max-width: 33%; margin-top: 0;
     padding: 12px !important; overflow: hidden;
     display: flex; align-items: stretch;
-    border-left: 3px solid rgba(69, 206, 255, 0.15) !important;
-    animation: co-previewPulse 4s ease-in-out infinite, co-heartbeatL 12s ease-in-out infinite !important
+    border-width: 1px 1px 1px 3px !important;
+    border-color: rgba(69, 206, 255, 0.15) !important;
+    animation: co-previewPulse 4s ease-in-out infinite, co-heartbeat 12s ease-in-out infinite !important
 }
 .co-sc-preview-box::before { display: none !important }
 .co-sc-preview-box::after { display: none !important }
@@ -1043,10 +983,13 @@ div.mt-2 {
 .co-sc-row:has(.sc-ent-4:hover) .sc-img-4 { opacity: 1 }
 .co-sc-row:has(.sc-ent-5:hover) .sc-img-5 { opacity: 1 }
 
-/* List box — right, with label */
+/* List box — right, with label + heartbeat */
 .co-sc-list-box {
     flex: 1; margin-top: 0; padding: 0 !important; overflow: hidden;
-    display: flex; flex-direction: column
+    display: flex; flex-direction: column;
+    border-width: 1px 3px 1px 1px !important;
+    border-color: rgba(69, 206, 255, 0.15) !important;
+    animation: co-fadeUp .6s ease both, co-heartbeat 12s ease-in-out infinite !important
 }
 .co-sc-list-box .co-card-label {
     padding: 24px 24px 14px; flex-shrink: 0
@@ -1164,9 +1107,9 @@ div.mt-2 {
 
 /* ═══ CREDITS ═══ */
 .co-credits {
-    border-left: 3px solid rgba(69, 206, 255, 0.15);
-    border-right: 3px solid rgba(69, 206, 255, 0.15);
-    animation: co-fadeUp .6s ease .4s both, co-heartbeatLR 12s ease-in-out infinite
+    border-width: 1px 3px 1px 3px !important;
+    border-color: rgba(69, 206, 255, 0.15) !important;
+    animation: co-fadeUp .6s ease .4s both, co-heartbeat 12s ease-in-out infinite !important
 }
 .co-credits-grid {
     display: flex; gap: 16px; margin-top: 8px

@@ -6,10 +6,11 @@
 /* --- 1. FULLPAGE BACKGROUND IMAGE --- */
 body {
   background-image: url("https://curie-assets.site/images/Himiko_Chatbg.webp") !important;
-  background-size: cover !important;
-  background-position: center center !important;
+  background-size: 100% auto !important;
+  background-position: top center !important;
   background-repeat: no-repeat !important;
   background-attachment: fixed !important;
+  background-color: #0a0a12 !important;
 }
 
 /* Ant Layout wrapper — make transparent so body BG shows through */
@@ -56,15 +57,21 @@ body {
 }
 
 /* --- 5. CHAT INPUT FIELD — same dark gray transparent style --- */
-.rounded-top,
+.rounded-top {
+  background: rgba(28, 28, 32, 0.70) !important;
+  border: 1px solid rgba(80, 130, 190, 0.35) !important;
+  border-radius: 8px !important;
+}
+
 .rounded-top textarea,
 .rounded-top input,
 .rounded-top .ant-input,
 .rounded-top .ant-input-affix-wrapper {
-  background: rgba(28, 28, 32, 0.70) !important;
-  border: 1px solid rgba(80, 130, 190, 0.35) !important;
+  background: transparent !important;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
   color: #ffffff !important;
-  border-radius: 8px !important;
 }
 
 .rounded-top textarea::placeholder,
@@ -76,6 +83,12 @@ body {
 .rounded-top input:focus,
 .rounded-top .ant-input:focus,
 .rounded-top .ant-input-affix-wrapper-focused {
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.rounded-top:focus-within {
   border-color: rgba(90, 145, 210, 0.6) !important;
   box-shadow: 0 0 6px rgba(90, 145, 210, 0.25) !important;
 }

@@ -761,37 +761,45 @@ div.mt-2 {
     50% { box-shadow: 0 0 20px rgba(69, 206, 255, 0.5), 0 0 45px rgba(69, 206, 255, 0.15) }
 }
 
-/* ═══ FOX FIRE — Border shimmer sweep (top→bottom per card) ═══ */
-@keyframes co-borderShimmer {
-    0% {
-        -webkit-mask-position: 0 -100%;
-        mask-position: 0 -100%
-    }
-    12.5% {
-        -webkit-mask-position: 0 200%;
-        mask-position: 0 200%
-    }
-    12.6%, 100% {
-        -webkit-mask-position: 0 -100%;
-        mask-position: 0 -100%
-    }
+/* ═══ BORDER SWEEP — smooth translateY, no mask, no flicker ═══ */
+/* 7s total: 4 × 1s sweeps + 3s pause */
+/* Bar is 30% of box height. To traverse full box: -110% → 340% */
+/* Each sweep = 14.3% of animation (1s of 7s) */
+@keyframes co-borderSweep {
+    0% { transform: translateY(-110%); opacity: 0 }
+    1% { opacity: 1 }
+    13% { transform: translateY(340%); opacity: 1 }
+    14.3% { transform: translateY(340%); opacity: 0 }
+    14.4%, 100% { transform: translateY(-110%); opacity: 0 }
 }
 
-/* ═══ FOX FIRE — Profile/Preview outer pulse ═══ */
+/* ═══ PROFILE/PREVIEW — bright gradient pulse ═══ */
+/* Top: #38b7ff, Bottom: #45ceff */
 @keyframes co-foxFirePulse {
     0%, 100% {
-        box-shadow: 0 0 8px rgba(69, 206, 255, 0.06), 0 0 20px rgba(69, 206, 255, 0.03);
-        border-color: rgba(69, 206, 255, 0.12)
+        box-shadow:
+            0 -4px 10px rgba(56, 183, 255, 0.15),
+            0 4px 10px rgba(69, 206, 255, 0.15),
+            0 0 8px rgba(62, 195, 255, 0.1);
+        border-color: rgba(69, 206, 255, 0.15)
     }
     50% {
-        box-shadow: 0 0 16px rgba(69, 206, 255, 0.18), 0 0 40px rgba(69, 206, 255, 0.08), 0 0 60px rgba(69, 206, 255, 0.03);
-        border-color: rgba(69, 206, 255, 0.25)
+        box-shadow:
+            0 -6px 16px rgba(56, 183, 255, 0.4),
+            0 6px 16px rgba(69, 206, 255, 0.4),
+            0 0 12px rgba(62, 195, 255, 0.3),
+            0 0 25px rgba(62, 195, 255, 0.12);
+        border-color: rgba(69, 206, 255, 0.3)
     }
 }
 
 /* Legacy — kept for compatibility */
+@keyframes co-borderShimmer {
+    0% { -webkit-mask-position: 0 -100%; mask-position: 0 -100% }
+    100% { -webkit-mask-position: 0 200%; mask-position: 0 200% }
+}
 @keyframes co-foxFlicker {
-    0%, 100% { border-color: rgba(69, 206, 255, 0.1) }
+    0%, 100% { border-color: rgba(69, 206, 255, 0.08) }
 }
 @keyframes co-foxInnerGlow {
     0%, 100% { transform: translate(0, 0) }
@@ -840,48 +848,48 @@ div.mt-2 {
 /* ═══ CHARACTER NAME — hidden, now pseudo-element on avatar ═══ */
 .co-name { display: none !important }
 
-/* ═══ CARDS — Clean dark, no outer glow ═══ */
+/* ═══ CARDS — Clean dark, static ═══ */
 .co-card {
     background: linear-gradient(165deg, #0c1628 0%, #091020 45%, #070d1a 100%); 
-    border: 1px solid rgba(69, 206, 255, 0.1);
-    border-left: 3px solid rgba(69, 206, 255, 0.2);
+    border: 1px solid rgba(69, 206, 255, 0.08);
+    border-left: 3px solid rgba(69, 206, 255, 0.15);
     border-radius: 0; padding: 24px; margin-top: 16px;
     box-shadow: 0 0 12px rgba(0, 0, 0, 0.4);
     animation: co-fadeUp .6s ease both;
     position: relative;
-    overflow: visible
+    overflow: hidden
 }
 .co-card::before { display: none }
 .co-card::after { display: none }
 .co-card > * { position: relative; z-index: 1 }
 
-/* ═══ BORDER SHIMMER — Sequential top-to-bottom cascade ═══ */
-.co-right-stack .co-card::before,
-.co-sc-list-box::before,
-.co-credits::before {
+/* ═══ BORDER SHIMMER — 3px light bar sweeps down left edge via translateY ═══ */
+.co-right-stack > .co-card::after,
+.co-sc-row > .co-sc-list-box::after {
     content: '' !important;
     display: block !important;
     position: absolute !important;
-    inset: 0;
-    border: 1px solid #45ceff;
-    border-left: 3px solid #45ceff;
+    left: 0; top: 0;
+    width: 3px; height: 30%;
+    background: linear-gradient(to bottom, transparent, #45ceff 20%, #7aeaff 50%, #45ceff 80%, transparent);
+    box-shadow: 0 0 5px #45ceff, 0 0 12px rgba(69, 206, 255, 0.3);
+    z-index: 5;
     pointer-events: none;
-    z-index: 3;
-    -webkit-mask: linear-gradient(to bottom, transparent 0%, #fff 30%, #fff 70%, transparent 100%);
-    mask: linear-gradient(to bottom, transparent 0%, #fff 30%, #fff 70%, transparent 100%);
-    -webkit-mask-size: 100% 35%;
-    mask-size: 100% 35%;
-    -webkit-mask-repeat: no-repeat;
-    mask-repeat: no-repeat;
-    animation: co-borderShimmer 8s linear infinite
+    opacity: 0;
+    transform: translateY(-110%);
+    animation: co-borderSweep 7s linear infinite
 }
 
-/* Sequential delays — each card 1s apart, 3s pause at end */
-.co-right-stack .co-card:nth-child(1)::before { animation-delay: 0s }
-.co-right-stack .co-card:nth-child(2)::before { animation-delay: 1s }
-.co-right-stack .co-card:nth-child(3)::before { animation-delay: 2s }
-.co-sc-list-box::before { animation-delay: 3s }
-.co-credits::before { animation-delay: 4s }
+/* Chain: About(0s) → Creator's Note(1s) → Feedback(2s) → Scenarios(3s) → 3s pause */
+.co-right-stack > .co-card:nth-child(1)::after { animation-delay: 0s }
+.co-right-stack > .co-card:nth-child(2)::after { animation-delay: 1s }
+.co-right-stack > .co-card:nth-child(3)::after { animation-delay: 2s }
+.co-sc-row > .co-sc-list-box::after { animation-delay: 3s }
+
+/* Exclude profile, preview, credits from shimmer */
+.co-profile-box::after { display: none !important }
+.co-sc-preview-box::after { display: none !important }
+.co-credits::after { display: none !important }
 .co-card:nth-child(3) { animation-delay: .15s }
 .co-card:nth-child(4) { animation-delay: .2s }
 .co-card:nth-child(5) { animation-delay: .25s }
@@ -903,7 +911,7 @@ div.mt-2 {
     color: var(--co-text); line-height: 1.7; margin: 0
 }
 
-/* ═══ PROFILE IMAGE BOX — Pulsing outer glow ═══ */
+/* ═══ PROFILE IMAGE BOX — Bright gradient glow ═══ */
 .co-profile-box {
     padding: 0 !important; overflow: hidden;
     border: 1px solid rgba(69, 206, 255, 0.15) !important;

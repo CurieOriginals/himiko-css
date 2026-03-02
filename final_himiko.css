@@ -140,7 +140,7 @@ div.mt-4 { background: transparent !important; background-color: transparent !im
 
     /* Tagline — centered in header */
     .ant-row.ant-row-center>.ant-col-lg-6:first-child::after {
-        content: '5 GREETINGS  ·  10 IMAGES' !important;
+        content: '5 GREETINGS  ·  11 IMAGES' !important;
         grid-column: 1 !important;
         grid-row: 2 !important;
         align-self: end !important;

@@ -759,6 +759,31 @@ div.mt-2 {
     50% { box-shadow: 0 0 25px rgba(77, 166, 255, 0.5), 0 0 50px rgba(192, 224, 255, 0.15), 0 0 80px rgba(77, 166, 255, 0.08) }
 }
 
+/* ═══ LEFT EDGE HEARTBEAT — 2 pulses + 2s hold per color (sync across all boxes) ═══ */
+@keyframes co-leftEdgeBeat {
+    /* Phase 1 → #45ceff */
+    0%   { background: rgba(56, 183, 255, 0.75); box-shadow: 0 0 10px rgba(56, 183, 255, 0.18), 0 0 26px rgba(69, 206, 255, 0.08) }
+    2%   { background: #45ceff; box-shadow: 0 0 18px rgba(69, 206, 255, 0.55), 0 0 46px rgba(69, 206, 255, 0.20) }
+    4%   { background: rgba(69, 206, 255, 0.40); box-shadow: 0 0 10px rgba(69, 206, 255, 0.20), 0 0 28px rgba(69, 206, 255, 0.10) }
+    6%   { background: #45ceff; box-shadow: 0 0 18px rgba(69, 206, 255, 0.60), 0 0 52px rgba(69, 206, 255, 0.22) }
+    8%   { background: rgba(69, 206, 255, 0.45); box-shadow: 0 0 10px rgba(69, 206, 255, 0.22), 0 0 30px rgba(69, 206, 255, 0.10) }
+    11.11%, 33.33% { background: #45ceff; box-shadow: 0 0 12px rgba(69, 206, 255, 0.30), 0 0 34px rgba(69, 206, 255, 0.12) }
+
+    /* Phase 2 → WHITE */
+    35.33% { background: #ffffff; box-shadow: 0 0 18px rgba(255, 255, 255, 0.55), 0 0 54px rgba(69, 206, 255, 0.22) }
+    37.33% { background: rgba(255, 255, 255, 0.45); box-shadow: 0 0 10px rgba(255, 255, 255, 0.25), 0 0 30px rgba(69, 206, 255, 0.12) }
+    39.33% { background: #ffffff; box-shadow: 0 0 18px rgba(255, 255, 255, 0.60), 0 0 62px rgba(69, 206, 255, 0.24) }
+    41.33% { background: rgba(255, 255, 255, 0.48); box-shadow: 0 0 10px rgba(255, 255, 255, 0.28), 0 0 32px rgba(69, 206, 255, 0.12) }
+    44.44%, 66.66% { background: #ffffff; box-shadow: 0 0 12px rgba(255, 255, 255, 0.28), 0 0 38px rgba(69, 206, 255, 0.14) }
+
+    /* Phase 3 → #38b7ff */
+    68.66% { background: #38b7ff; box-shadow: 0 0 18px rgba(56, 183, 255, 0.55), 0 0 54px rgba(69, 206, 255, 0.20) }
+    70.66% { background: rgba(56, 183, 255, 0.42); box-shadow: 0 0 10px rgba(56, 183, 255, 0.22), 0 0 28px rgba(69, 206, 255, 0.10) }
+    72.66% { background: #38b7ff; box-shadow: 0 0 18px rgba(56, 183, 255, 0.60), 0 0 60px rgba(69, 206, 255, 0.22) }
+    74.66% { background: rgba(56, 183, 255, 0.45); box-shadow: 0 0 10px rgba(56, 183, 255, 0.24), 0 0 30px rgba(69, 206, 255, 0.10) }
+    77.77%, 100% { background: #38b7ff; box-shadow: 0 0 12px rgba(56, 183, 255, 0.28), 0 0 34px rgba(69, 206, 255, 0.12) }
+}
+
 /* ═══ FOX FIRE — border flicker, irregular like real flame ═══ */
 @keyframes co-foxFlicker {
     0% {
@@ -811,12 +836,6 @@ div.mt-2 {
     }
 }
 
-/* Inner glow removed — clean static gradient instead */
-@keyframes co-foxInnerGlow {
-    0% { transform: translate(0%, 0%) }
-    100% { transform: translate(0%, 0%) }
-}
-
 /* ═══ FOX FIRE — bottom edge flicker ═══ */
 @keyframes co-foxEdgeFlame {
     0%, 100% { opacity: 0.4 }
@@ -825,12 +844,6 @@ div.mt-2 {
     55% { opacity: 1 }
     70% { opacity: 0.6 }
     88% { opacity: 0.9 }
-}
-
-/* Fox fire border shimmer */
-@keyframes co-foxBorderShimmer {
-    0%, 100% { opacity: 0.3 }
-    50% { opacity: 0.8 }
 }
 
 @keyframes co-swipeHint {
@@ -871,33 +884,45 @@ div.mt-2 {
 
 /* ═══ CARDS — Fox Fire Design ═══ */
 .co-card {
-    background: linear-gradient(165deg, #0c1628 0%, #091020 45%, #070d1a 100%); 
+    background: linear-gradient(165deg, #0c1628 0%, #091020 45%, #070d1a 100%);
     border: 1px solid rgba(69, 206, 255, 0.12);
-    border-left: 3px solid rgba(69, 206, 255, 0.35);
     border-radius: 0; padding: 24px; margin-top: 16px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
-    animation: co-fadeUp .6s ease both, co-foxFlicker 4s ease-in-out infinite;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.55);
+    animation: co-fadeUp .6s ease both;
     position: relative;
-    overflow: visible
+    overflow: hidden
 }
-/* No ::before — clean interior, no circles */
-.co-card::before { display: none }
-/* Ensure card content above everything */
-.co-card > * { position: relative; z-index: 1 }
-/* Fox fire bottom edge — glowing flame line */
+
+/* Left edge pulse bar — heartbeat cycle (ALL boxes sync) */
+.co-card::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+    background: rgba(56, 183, 255, 0.75);
+    box-shadow:
+        0 0 10px rgba(56, 183, 255, 0.18),
+        0 0 26px rgba(69, 206, 255, 0.08);
+    opacity: 0.95;
+    pointer-events: none;
+    z-index: 1;
+    animation: co-leftEdgeBeat 9s ease-in-out infinite
+}
+
+/* Ensure card content above edge bar */
+.co-card > * { position: relative; z-index: 2 }
+
+/* Fox fire bottom edge — keep, but STATIC (no border animation) */
 .co-card::after {
-    content: ''; position: absolute; bottom: -1px; left: 3px; right: 0; height: 1px;
-    background: linear-gradient(90deg, 
-        rgba(69, 206, 255, 0.6) 0%, 
-        rgba(69, 206, 255, 0.2) 40%, 
-        transparent 70%);
-    box-shadow: 0 0 6px rgba(69, 206, 255, 0.4), 0 0 14px rgba(69, 206, 255, 0.15), 0 -2px 8px rgba(69, 206, 255, 0.06);
-    animation: co-foxEdgeFlame 3s ease-in-out infinite;
-    z-index: 2
+    content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 1px;
+    background: linear-gradient(90deg,
+        rgba(69, 206, 255, 0.55) 0%,
+        rgba(69, 206, 255, 0.18) 45%,
+        transparent 75%);
+    box-shadow: 0 0 6px rgba(69, 206, 255, 0.25), 0 0 14px rgba(69, 206, 255, 0.10);
+    opacity: 0.75;
+    z-index: 1
 }
-.co-card:nth-child(3) { animation-delay: .15s }
-.co-card:nth-child(4) { animation-delay: .2s }
-.co-card:nth-child(5) { animation-delay: .25s }
 
 .co-card-label {
     font-family: var(--co-font-body); font-size: 0.7em; font-weight: 600;
@@ -916,16 +941,33 @@ div.mt-2 {
     color: var(--co-text); line-height: 1.7; margin: 0
 }
 
-/* ═══ PROFILE IMAGE BOX — Fox Fire Glow ═══ */
+/* ═══ PROFILE IMAGE BOX — KNALLIGES FOXFIRE (Gradient Ring + inner white frame) ═══ */
 .co-profile-box {
-    padding: 0 !important; overflow: hidden;
-    border: 1px solid rgba(69, 206, 255, 0.2) !important;
-    border-left: 3px solid rgba(69, 206, 255, 0.45) !important;
-    animation: co-foxFirePulse 4s ease-in-out infinite !important
+    padding: 0 !important;
+    overflow: hidden !important;
+
+    /* Thin, vivid gradient ring (NOT wide) */
+    border: 2px solid transparent !important;
+    background:
+        linear-gradient(165deg, #0c1628 0%, #091020 45%, #070d1a 100%) padding-box,
+        linear-gradient(to bottom, #38b7ff 0%, #ffffff 52%, #45ceff 100%) border-box !important;
+
+    /* Inner white frame + crisp foxfire glow */
+    box-shadow:
+        inset 0 0 0 2px rgba(255, 255, 255, 0.88),
+        0 0 18px rgba(69, 206, 255, 0.40),
+        0 0 42px rgba(56, 183, 255, 0.20),
+        0 0 15px rgba(0, 0, 0, 0.55) !important;
+
+    animation: co-fadeUp .6s ease both !important
 }
 .co-profile-img {
-    width: 100%; height: 100%; object-fit: cover; object-position: center top;
-    display: block
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
+    filter: none !important
 }
 
 /* ═══ SCENARIOS — TWO-BOX LAYOUT WITH HOVER PREVIEW ═══ */
@@ -933,12 +975,16 @@ div.mt-2 {
     display: flex; gap: 16px; margin-top: 16px
 }
 
-/* Preview box — left 33%, fox fire glow */
+/* Preview box — left 33%, foxfire edge heartbeat (no border animation) */
 .co-sc-preview-box {
-    flex: 0 0 33%; max-width: 33%; margin-top: 0;
-    padding: 12px !important; overflow: hidden;
-    display: flex; align-items: stretch;
-    animation: co-foxFirePulse 5s ease-in-out infinite 1.5s !important
+    flex: 0 0 33%;
+    max-width: 33%;
+    margin-top: 0;
+    padding: 12px !important;
+    overflow: hidden;
+    display: flex;
+    align-items: stretch;
+    animation: co-fadeUp .6s ease both !important
 }
 .co-sc-imgwrap {
     position: relative; width: 100%; min-height: 750px;
@@ -1178,15 +1224,6 @@ div.mt-2 {
     .co-header-img { height: 180px }
     .co-name { font-size: 1.6em; margin-top: -20px }
     .co-card { padding: 18px; margin-top: 12px }
-    .co-sc-item {
-        flex: 0 0 100%; padding: 14px 16px; gap: 12px
-    }
-    .co-sc-img { width: 100px; height: 180px }
-    .co-sc-text h4 { font-size: 0.9em }
-    .co-sc-text p { font-size: 0.78em; line-height: 1.5 }
-    .co-sc-num { font-size: 0.75em; width: 28px; height: 22px }
-    .co-scenarios .co-card-label { padding: 16px 16px 10px }
-    .co-scenarios .co-card-label::after { right: 16px; font-size: 0.6em }
 
     /* Discussion collapse overflow fix — matches feedback hub */
     .ant-collapse,
@@ -1245,203 +1282,4 @@ div.mt-2 {
     }
     .ant-comment-avatar { margin-right: 10px !important }
     .ant-comment-avatar .ant-avatar { width: 32px !important; height: 32px !important }
-}
-
-
-/* ═══════════════════════════════════════
-   FOXFIRE — SEQUENTIAL BORDER SWEEP
-   Boxes: About Himiko → Creator's Note → Feedback → Scenarios → Credits
-   IMPORTANT: This animation is MASKED to the BORDER only (no glow outside, no fill inside).
-   ═══════════════════════════════════════ */
-
-:root{
-    --co-seq-cycle: 12.5s;        /* full loop across 5 boxes */
-    --co-sweep-w: 2px;            /* border thickness of the sweep */
-    --co-sweep-a: rgba(77, 166, 255, 0.00);
-    --co-sweep-b: rgba(77, 166, 255, 0.95);
-    --co-sweep-c: rgba(192, 224, 255, 1.00);
-    --co-sweep-d: rgba(69, 206, 255, 0.80);
-}
-
-/* The sweep itself (clockwise): only visible during the first 20% of the cycle */
-@keyframes co-borderSeq {
-    0%   { opacity: 0; transform: rotate(0deg) }
-    1%   { opacity: 1; transform: rotate(0deg) }
-    19%  { opacity: 1; transform: rotate(360deg) }
-    20%  { opacity: 0; transform: rotate(360deg) }
-    100% { opacity: 0; transform: rotate(360deg) }
-}
-
-/* Targets (based on your HTML order) */
-.co-card-row .co-right-stack > .co-card:nth-child(1), /* About Himiko */
-.co-card-row .co-right-stack > .co-card:nth-child(2), /* Creator's Note */
-.co-card-row .co-right-stack > .co-card:nth-child(3), /* Feedback */
-.co-sc-row > .co-card.co-sc-list-box,                 /* Scenarios (list box) */
-.co-card.co-credits                                   /* Credits */
-{
-    /* remove the old outer glow + flicker on these boxes */
-    box-shadow: none !important;
-    animation: co-fadeUp .6s ease both !important;
-    overflow: hidden !important;
-
-    /* calm base border, the animation does the "crazy" */
-    border: 1px solid rgba(69, 206, 255, 0.14) !important;
-    border-left: 1px solid rgba(69, 206, 255, 0.14) !important;
-}
-
-/* remove the bottom "flame line" on these 5 boxes (so ONLY the border sweeps) */
-.co-card-row .co-right-stack > .co-card:nth-child(1)::after,
-.co-card-row .co-right-stack > .co-card:nth-child(2)::after,
-.co-card-row .co-right-stack > .co-card:nth-child(3)::after,
-.co-sc-row > .co-card.co-sc-list-box::after,
-.co-card.co-credits::after{
-    display:none !important;
-}
-
-/* The masked border sweep — BORDER ONLY */
-.co-card-row .co-right-stack > .co-card:nth-child(1)::before,
-.co-card-row .co-right-stack > .co-card:nth-child(2)::before,
-.co-card-row .co-right-stack > .co-card:nth-child(3)::before,
-.co-sc-row > .co-card.co-sc-list-box::before,
-.co-card.co-credits::before{
-    display:block !important;
-    content:"" !important;
-    position:absolute !important;
-    inset:0 !important;
-    padding: var(--co-sweep-w) !important;
-    border-radius: inherit !important;
-    pointer-events:none !important;
-    z-index: 3 !important;
-
-    /* "spirit flame" highlight wedge that travels clockwise */
-    background:
-        conic-gradient(
-            from 0deg,
-            var(--co-sweep-a) 0%,
-            var(--co-sweep-a) 70%,
-            var(--co-sweep-b) 78%,
-            var(--co-sweep-c) 84%,
-            var(--co-sweep-d) 88%,
-            var(--co-sweep-a) 100%
-        );
-
-    /* MASK to keep it *only* on the border ring */
-    -webkit-mask:
-        linear-gradient(#000 0 0) content-box,
-        linear-gradient(#000 0 0);
-    -webkit-mask-composite: xor;
-
-    mask:
-        linear-gradient(#000 0 0) content-box,
-        linear-gradient(#000 0 0);
-    mask-composite: exclude;
-
-    opacity: 0;
-    transform: rotate(0deg);
-    animation: co-borderSeq var(--co-seq-cycle) linear infinite;
-}
-
-/* Sequential offsets (negative delays so it starts instantly on load) */
-.co-card-row .co-right-stack > .co-card:nth-child(1)::before{ animation-delay: 0s !important }
-.co-card-row .co-right-stack > .co-card:nth-child(2)::before{ animation-delay: -2.5s !important }
-.co-card-row .co-right-stack > .co-card:nth-child(3)::before{ animation-delay: -5s !important }
-.co-sc-row > .co-card.co-sc-list-box::before{            animation-delay: -7.5s !important }
-.co-card.co-credits::before{                              animation-delay: -10s !important }
-
-/* ═══════════════════════════════════════
-   FOXFIRE — PROFILE IMAGE + SCENARIO PREVIEW GLOW
-   (more "spirit flame", less generic neon)
-   ═══════════════════════════════════════ */
-
-@keyframes co-foxAura {
-    0%, 100% {
-        border-color: rgba(69, 206, 255, 0.22);
-        box-shadow:
-            0 0 10px rgba(69, 206, 255, 0.14),
-            0 0 26px rgba(69, 206, 255, 0.06),
-            inset 0 0 0 rgba(0,0,0,0);
-    }
-    35% {
-        border-color: rgba(192, 224, 255, 0.35);
-        box-shadow:
-            0 0 16px rgba(69, 206, 255, 0.20),
-            0 0 46px rgba(69, 206, 255, 0.10),
-            inset 0 0 24px rgba(69, 206, 255, 0.04);
-    }
-    65% {
-        border-color: rgba(69, 206, 255, 0.40);
-        box-shadow:
-            0 0 22px rgba(69, 206, 255, 0.26),
-            0 0 70px rgba(69, 206, 255, 0.12),
-            inset 0 0 34px rgba(192, 224, 255, 0.05);
-    }
-}
-
-@keyframes co-foxFlameDrift {
-    0%, 100% { transform: translate(-2%, -1%) rotate(0deg); opacity: 0.55 }
-    35%      { transform: translate(2%, 1%) rotate(80deg);  opacity: 0.75 }
-    70%      { transform: translate(-1%, 2%) rotate(160deg); opacity: 0.62 }
-}
-
-@keyframes co-imageFoxFire {
-    0%, 100% { filter: saturate(1.05) contrast(1.04) brightness(0.98) }
-    50%      { filter: saturate(1.18) contrast(1.06) brightness(1.05) }
-}
-
-/* stronger, more "foxfire" */
-.co-profile-box,
-.co-sc-preview-box{
-    position: relative !important;
-    overflow: hidden !important;
-    border: 1px solid rgba(69, 206, 255, 0.22) !important;
-    border-left: 3px solid rgba(69, 206, 255, 0.62) !important;
-    animation: co-foxAura 4.4s ease-in-out infinite !important;
-}
-
-/* the flame veil stays INSIDE (overflow hidden), so it feels like spirit fire inside the glass */
-.co-profile-box::before,
-.co-sc-preview-box::before{
-    display:block !important;
-    content:"" !important;
-    position:absolute !important;
-    inset:-70px !important;
-    pointer-events:none !important;
-    z-index: 2 !important;
-    background:
-        radial-gradient(circle at 18% 28%, rgba(69, 206, 255, 0.40) 0%, transparent 58%),
-        radial-gradient(circle at 82% 72%, rgba(192, 224, 255, 0.22) 0%, transparent 55%),
-        radial-gradient(circle at 60% 20%, rgba(69, 206, 255, 0.18) 0%, transparent 45%),
-        conic-gradient(from 0deg,
-            transparent 0% 45%,
-            rgba(69, 206, 255, 0.40) 55%,
-            transparent 62% 78%,
-            rgba(77, 166, 255, 0.22) 86%,
-            transparent 100%);
-    filter: blur(24px);
-    mix-blend-mode: screen;
-    opacity: 0.6;
-    animation: co-foxFlameDrift 6.2s ease-in-out infinite;
-}
-
-/* keep all content above the veil */
-.co-profile-box > *,
-.co-sc-preview-box > *{
-    position: relative !important;
-    z-index: 3 !important;
-}
-
-/* image breath (subtle) */
-.co-profile-img{
-    animation: co-imageFoxFire 6s ease-in-out infinite !important;
-    will-change: filter;
-}
-
-/* preview wrapper gets a slightly darker glass so the flames pop */
-.co-sc-imgwrap{
-    background: rgba(5, 9, 18, 0.96) !important;
-}
-
-/* Optional: make scenario images feel more "spirit-lit" when shown */
-.co-sc-pimg{
-    filter: saturate(1.06) contrast(1.03);
 }

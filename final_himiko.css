@@ -994,7 +994,7 @@ div.mt-2 {
 
 .co-card p {
     font-family: var(--co-font-body); font-size: 0.92em; font-weight: 400;
-    color: var(--co-text); line-height: 1.7; margin: 0
+    color: var(--co-text); line-height: 1.7; margin: auto 0
 }
 /* Text centered between label (top) and button (bottom) */
 .co-right-stack .co-card > p {

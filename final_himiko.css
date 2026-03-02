@@ -127,8 +127,8 @@ div.mt-4 { background: transparent !important; background-color: transparent !im
         box-sizing: border-box !important;
         border-style: solid !important;
         border-width: 3px !important;
-        border-color: rgba(69, 206, 255, 0.15);
-        animation: co-heartbeat 12s ease-in-out infinite !important
+        border-color: #0f2b3d;
+        animation: co-heartbeatAll 12s ease-in-out infinite !important
     }
 
     /* Gradient fade overlay */
@@ -241,8 +241,8 @@ div.mt-4 { background: transparent !important; background-color: transparent !im
         background: url('https://curie-assets.site/images/Himiko_Header.webp') center 40% / cover no-repeat !important;
         border-style: solid !important;
         border-width: 3px !important;
-        border-color: rgba(69, 206, 255, 0.15);
-        animation: co-heartbeat 12s ease-in-out infinite !important
+        border-color: #0f2b3d;
+        animation: co-heartbeatAll 12s ease-in-out infinite !important
     }
     .ant-col.text-left.ant-col-xs-24.ant-col-lg-6::before {
         content: '' !important;
@@ -771,24 +771,88 @@ div.mt-2 {
 
 /* ═══ HEARTBEAT — ONE animation, border-color shorthand = all 4 sides ═══ */
 /* Elements control which sides are visible via border-width */
-@keyframes co-heartbeat {
-    0%        { border-color: rgba(69, 206, 255, 0.15) }
+/* ═══ HEARTBEAT LEFT ONLY ═══ */
+@keyframes co-heartbeatL {
+    0%        { border-left-color: #0f2b3d }
+    2%        { border-left-color: #45ceff }
+    4%        { border-left-color: #0f2b3d }
+    6%        { border-left-color: #45ceff }
+    8%, 25%   { border-left-color: #45ceff }
+    27%       { border-left-color: #fff }
+    29%       { border-left-color: #0f2b3d }
+    31%       { border-left-color: #fff }
+    33%, 50%  { border-left-color: #fff }
+    52%       { border-left-color: #38b7ff }
+    54%       { border-left-color: #0f2b3d }
+    56%       { border-left-color: #38b7ff }
+    58%, 75%  { border-left-color: #38b7ff }
+    77%       { border-left-color: #0f2b3d }
+    79%       { border-left-color: #1a4a5e }
+    81%       { border-left-color: #0f2b3d }
+    83%, 100% { border-left-color: #0f2b3d }
+}
+
+/* ═══ HEARTBEAT RIGHT ONLY ═══ */
+@keyframes co-heartbeatR {
+    0%        { border-right-color: #0f2b3d }
+    2%        { border-right-color: #45ceff }
+    4%        { border-right-color: #0f2b3d }
+    6%        { border-right-color: #45ceff }
+    8%, 25%   { border-right-color: #45ceff }
+    27%       { border-right-color: #fff }
+    29%       { border-right-color: #0f2b3d }
+    31%       { border-right-color: #fff }
+    33%, 50%  { border-right-color: #fff }
+    52%       { border-right-color: #38b7ff }
+    54%       { border-right-color: #0f2b3d }
+    56%       { border-right-color: #38b7ff }
+    58%, 75%  { border-right-color: #38b7ff }
+    77%       { border-right-color: #0f2b3d }
+    79%       { border-right-color: #1a4a5e }
+    81%       { border-right-color: #0f2b3d }
+    83%, 100% { border-right-color: #0f2b3d }
+}
+
+/* ═══ HEARTBEAT LEFT + RIGHT ═══ */
+@keyframes co-heartbeatLR {
+    0%        { border-left-color: #0f2b3d; border-right-color: #0f2b3d }
+    2%        { border-left-color: #45ceff; border-right-color: #45ceff }
+    4%        { border-left-color: #0f2b3d; border-right-color: #0f2b3d }
+    6%        { border-left-color: #45ceff; border-right-color: #45ceff }
+    8%, 25%   { border-left-color: #45ceff; border-right-color: #45ceff }
+    27%       { border-left-color: #fff; border-right-color: #fff }
+    29%       { border-left-color: #0f2b3d; border-right-color: #0f2b3d }
+    31%       { border-left-color: #fff; border-right-color: #fff }
+    33%, 50%  { border-left-color: #fff; border-right-color: #fff }
+    52%       { border-left-color: #38b7ff; border-right-color: #38b7ff }
+    54%       { border-left-color: #0f2b3d; border-right-color: #0f2b3d }
+    56%       { border-left-color: #38b7ff; border-right-color: #38b7ff }
+    58%, 75%  { border-left-color: #38b7ff; border-right-color: #38b7ff }
+    77%       { border-left-color: #0f2b3d; border-right-color: #0f2b3d }
+    79%       { border-left-color: #1a4a5e; border-right-color: #1a4a5e }
+    81%       { border-left-color: #0f2b3d; border-right-color: #0f2b3d }
+    83%, 100% { border-left-color: #0f2b3d; border-right-color: #0f2b3d }
+}
+
+/* ═══ HEARTBEAT ALL 4 SIDES — Header only ═══ */
+@keyframes co-heartbeatAll {
+    0%        { border-color: #0f2b3d }
     2%        { border-color: #45ceff }
-    4%        { border-color: rgba(69, 206, 255, 0.3) }
+    4%        { border-color: #0f2b3d }
     6%        { border-color: #45ceff }
     8%, 25%   { border-color: #45ceff }
     27%       { border-color: #fff }
-    29%       { border-color: rgba(200, 230, 255, 0.5) }
+    29%       { border-color: #0f2b3d }
     31%       { border-color: #fff }
     33%, 50%  { border-color: #fff }
     52%       { border-color: #38b7ff }
-    54%       { border-color: rgba(56, 183, 255, 0.4) }
+    54%       { border-color: #0f2b3d }
     56%       { border-color: #38b7ff }
     58%, 75%  { border-color: #38b7ff }
-    77%       { border-color: rgba(69, 206, 255, 0.15) }
-    79%       { border-color: rgba(56, 183, 255, 0.3) }
-    81%       { border-color: rgba(69, 206, 255, 0.15) }
-    83%, 100% { border-color: rgba(69, 206, 255, 0.15) }
+    77%       { border-color: #0f2b3d }
+    79%       { border-color: #1a4a5e }
+    81%       { border-color: #0f2b3d }
+    83%, 100% { border-color: #0f2b3d }
 }
 
 /* ═══ PROFILE — Fox fire gradient glow pulse (keeps white inner border) ═══ */
@@ -878,16 +942,18 @@ div.mt-2 {
 /* ═══ CARDS — Clean dark ═══ */
 .co-card {
     background: linear-gradient(165deg, #0c1628 0%, #091020 45%, #070d1a 100%); 
-    border: 1px solid rgba(69, 206, 255, 0.15);
+    border: 1px solid #0f2b3d;
     border-radius: 0; padding: 24px; margin-top: 16px;
     box-shadow: 0 0 12px rgba(0, 0, 0, 0.4);
-    animation: co-fadeUp .6s ease both, co-heartbeat 12s ease-in-out infinite;
+    animation: co-fadeUp .6s ease both;
     position: relative;
     overflow: hidden
 }
 /* Right-stack cards: 3px right border */
 .co-right-stack > .co-card {
-    border-width: 1px 3px 1px 1px
+    border-width: 1px 3px 1px 1px;
+    border-color: #0f2b3d;
+    animation: co-fadeUp .6s ease both, co-heartbeatR 12s ease-in-out infinite
 }
 .co-card::before { display: none }
 .co-card::after { display: none }
@@ -919,14 +985,14 @@ div.mt-2 {
     padding: 0 !important; overflow: hidden;
     border-style: solid !important;
     border-width: 1px 1px 1px 3px !important;
-    border-color: rgba(69, 206, 255, 0.15);
+    border-color: #0f2b3d;
     box-shadow:
         0 -6px 12px -2px #38b7ff,
         -6px 0 12px -2px rgba(56, 183, 255, 0.7),
         0 0 6px rgba(255, 255, 255, 0.5),
         0 6px 12px -2px #45ceff,
         6px 0 8px -2px rgba(69, 206, 255, 0.6);
-    animation: co-foxFirePulse 4s ease-in-out infinite, co-heartbeat 12s ease-in-out infinite !important;
+    animation: co-foxFirePulse 4s ease-in-out infinite, co-heartbeatL 12s ease-in-out infinite !important;
     position: relative
 }
 .co-profile-box::before { display: none !important }
@@ -961,8 +1027,8 @@ div.mt-2 {
     display: flex; align-items: stretch;
     border-style: solid !important;
     border-width: 1px 1px 1px 3px !important;
-    border-color: rgba(69, 206, 255, 0.15);
-    animation: co-previewPulse 4s ease-in-out infinite, co-heartbeat 12s ease-in-out infinite !important
+    border-color: #0f2b3d;
+    animation: co-previewPulse 4s ease-in-out infinite, co-heartbeatL 12s ease-in-out infinite !important
 }
 .co-sc-preview-box::before { display: none !important }
 .co-sc-preview-box::after { display: none !important }
@@ -1001,8 +1067,8 @@ div.mt-2 {
     display: flex; flex-direction: column;
     border-style: solid !important;
     border-width: 1px 3px 1px 1px !important;
-    border-color: rgba(69, 206, 255, 0.15);
-    animation: co-fadeUp .6s ease both, co-heartbeat 12s ease-in-out infinite !important
+    border-color: #0f2b3d;
+    animation: co-fadeUp .6s ease both, co-heartbeatR 12s ease-in-out infinite !important
 }
 .co-sc-list-box .co-card-label {
     padding: 24px 24px 14px; flex-shrink: 0
@@ -1077,7 +1143,7 @@ div.mt-2 {
 .co-preset-inline span { position: relative; z-index: 1 }
 
 /* ═══ FEEDBACK ═══ */
-.co-feedback { animation: co-fadeUp .6s ease .35s both, co-heartbeat 12s ease-in-out infinite !important }
+.co-feedback { animation: co-fadeUp .6s ease .35s both, co-heartbeatR 12s ease-in-out infinite !important }
 .co-right-stack .co-feedback { text-align: left }
 .co-feedback p { color: var(--co-text-dim); margin-bottom: 12px !important }
 
@@ -1122,8 +1188,8 @@ div.mt-2 {
 .co-credits {
     border-style: solid !important;
     border-width: 1px 3px 1px 3px !important;
-    border-color: rgba(69, 206, 255, 0.15);
-    animation: co-fadeUp .6s ease .4s both, co-heartbeat 12s ease-in-out infinite !important
+    border-color: #0f2b3d;
+    animation: co-fadeUp .6s ease .4s both, co-heartbeatLR 12s ease-in-out infinite !important
 }
 .co-credits-grid {
     display: flex; gap: 16px; margin-top: 8px

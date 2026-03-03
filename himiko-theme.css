@@ -1,14 +1,5 @@
-/* ============================================
-   HIMIKO CUSTOM THEME — chub.ai
-   ============================================ */
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Zen+Antique+Soft&display=swap');
-
-/* ===== 1. BACKGROUND =====
-   Exactly like the example: solid color on body,
-   gradient via body::before as fixed overlay.
-   Chub overwrites background-image on body,
-   but cannot touch ::before. */
 
 body {
   background-color: #04060e !important;

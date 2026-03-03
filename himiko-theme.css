@@ -1,22 +1,32 @@
-/* --- FONTS --- */
+/* ============================================
+   HIMIKO CUSTOM THEME — chub.ai
+   ============================================ */
+
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Zen+Antique+Soft&display=swap');
 
-/* ===== 1. BACKGROUND — gradient on body ===== */
+/* ===== 1. BACKGROUND =====
+   Exactly like the example: solid color on body,
+   gradient via body::before as fixed overlay.
+   Chub overwrites background-image on body,
+   but cannot touch ::before. */
+
 body {
   background-color: #04060e !important;
-  background-image: linear-gradient(to bottom, #04060e 0%, #0a1628 40%, #122240 100%) !important;
-  background-attachment: fixed !important;
-  min-height: 100dvh !important;
+  background-image: none !important;
   position: relative !important;
+  min-height: 100dvh !important;
 }
 
-/* Kill any body::before overlay chub might inject */
 body::before {
-  background: none !important;
-  display: none !important;
+  content: '' !important;
+  position: fixed !important;
+  inset: 0 !important;
+  background: linear-gradient(to bottom, rgba(4, 6, 14, 1) 0%, rgba(10, 22, 40, 1) 40%, rgba(18, 34, 64, 1) 100%) !important;
+  z-index: 0 !important;
+  pointer-events: none !important;
 }
 
-/* Make every layout layer transparent so gradient shows through */
+/* All layout layers transparent (from example) */
 #root,
 #root > div,
 .ant-layout,
@@ -39,39 +49,62 @@ div.mt-4 {
   background: transparent !important;
 }
 
-/* ===== 3. CHAT FRAME — blue tint with border ===== */
+/* ===== 3. CHAT FRAME — glassmorphism ===== */
 .ant-col-xs-24.ant-col-md-18.ant-col-lg-14,
 .ant-col-xs-24.ant-col-md-18 {
-  background: rgba(30, 55, 90, 0.55) !important;
-  border-radius: 8px !important;
-  backdrop-filter: blur(6px) !important;
-  -webkit-backdrop-filter: blur(6px) !important;
-  border-left: 1px solid rgba(100, 160, 230, 0.25) !important;
-  border-right: 1px solid rgba(100, 160, 230, 0.25) !important;
+  background: rgba(15, 25, 50, 0.45) !important;
+  border-radius: 12px !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  border-left: 1px solid rgba(100, 160, 230, 0.2) !important;
+  border-right: 1px solid rgba(100, 160, 230, 0.2) !important;
 }
 
-/* ===== 4. CHAT MESSAGE AREA — dark gray transparent ===== */
+/* ===== 4. CHAT MESSAGE LIST AREA ===== */
 .ant-list,
 .ant-list-items,
 .ant-spin-container {
-  background: rgba(28, 28, 32, 0.65) !important;
-  border-radius: 6px !important;
+  background: transparent !important;
+  border-radius: 0 !important;
+}
+
+/* ===== 5. INDIVIDUAL MESSAGES — separated, rounded, glass =====
+   Key selector from example: div[length][color]:has(.msg-mkdn-container) */
+
+div[length][color]:has(.msg-mkdn-container) {
+  max-height: none !important;
+  overflow: visible !important;
+  padding: 1em 1.2em !important;
+  margin: 0.5em 0.6em !important;
+  background: rgba(20, 30, 55, 0.5) !important;
+  background-color: rgba(20, 30, 55, 0.5) !important;
+  border: 1px solid rgba(100, 160, 230, 0.12) !important;
+  border-radius: 12px !important;
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+}
+
+div[length][color]:has(.msg-mkdn-container)::before,
+div[length][color]:has(.msg-mkdn-container)::after {
+  display: none !important;
 }
 
 .ant-list-item {
   background: transparent !important;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06) !important;
+  border-bottom: none !important;
 }
 
 .ant-list-item-meta-content {
   background: transparent !important;
 }
 
-/* ===== 5. CHAT INPUT — dark gray transparent ===== */
+/* ===== 6. CHAT INPUT — glass style ===== */
 .rounded-top {
-  background: rgba(28, 28, 32, 0.70) !important;
-  border: 1px solid rgba(80, 130, 190, 0.35) !important;
-  border-radius: 8px !important;
+  background: rgba(15, 25, 50, 0.5) !important;
+  border: 1px solid rgba(80, 130, 190, 0.3) !important;
+  border-radius: 10px !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
 }
 
 .rounded-top textarea,
@@ -88,7 +121,7 @@ div.mt-4 {
 
 .rounded-top textarea::placeholder,
 .rounded-top input::placeholder {
-  color: rgba(255, 255, 255, 0.4) !important;
+  color: rgba(255, 255, 255, 0.35) !important;
 }
 
 .rounded-top textarea:focus,
@@ -101,11 +134,11 @@ div.mt-4 {
 }
 
 .rounded-top:focus-within {
-  border-color: rgba(90, 145, 210, 0.6) !important;
-  box-shadow: 0 0 6px rgba(90, 145, 210, 0.25) !important;
+  border-color: rgba(90, 145, 210, 0.5) !important;
+  box-shadow: 0 0 8px rgba(90, 145, 210, 0.2) !important;
 }
 
-/* ===== 6. NAV BUTTONS — blueish transparent ===== */
+/* ===== 7. NAV BUTTONS ===== */
 .anticon-left,
 .anticon-right,
 .anticon-left svg,
@@ -121,7 +154,7 @@ div.mt-4 {
 button:has(> .anticon-left),
 button:has(> .anticon-right) {
   background: rgba(30, 55, 90, 0.45) !important;
-  border: 1px solid rgba(80, 130, 190, 0.30) !important;
+  border: 1px solid rgba(80, 130, 190, 0.25) !important;
   border-radius: 6px !important;
   backdrop-filter: blur(4px) !important;
   -webkit-backdrop-filter: blur(4px) !important;
@@ -133,7 +166,7 @@ button:has(> .anticon-right):hover {
   background: rgba(40, 70, 115, 0.60) !important;
 }
 
-/* ===== 7. MESSAGE CONTROL BUTTONS — keep normal size ===== */
+/* ===== 8. MESSAGE CONTROL BUTTONS — keep normal ===== */
 .message-control-buttons {
   font-size: inherit !important;
   font-family: inherit !important;
@@ -149,9 +182,9 @@ button:has(> .anticon-right):hover {
   line-height: inherit !important;
 }
 
-/* ===== 8. TEXT STYLING — targeted selectors only ===== */
+/* ===== 9. TEXT STYLING ===== */
 
-/* Message text — white, Inter font */
+/* Message text — white, Inter */
 .ant-list-item-meta-description,
 .ant-list-item-meta-description p,
 .ant-list-item-meta-description span:not(.anticon),
@@ -164,7 +197,7 @@ button:has(> .anticon-right):hover {
   line-height: 1.7 !important;
 }
 
-/* Bot name — Japanese-style font, NO underline in any state */
+/* Bot name — Zen Antique Soft, no underline EVER */
 .ant-list-item-meta-title,
 .ant-list-item-meta-title * {
   font-family: 'Zen Antique Soft', serif !important;
@@ -189,7 +222,7 @@ button:has(> .anticon-right):hover {
   font-family: 'Zen Antique Soft', serif !important;
 }
 
-/* Italic text (*asterisks*) = soft blue */
+/* Italic (*asterisks*) = soft blue */
 .ant-list-item-meta-description em,
 .ant-list-item-meta-description i,
 .msg-mkdn-container em,
@@ -199,7 +232,7 @@ button:has(> .anticon-right):hover {
   font-family: 'Inter', sans-serif !important;
 }
 
-/* Links inside messages — NO underline by default */
+/* Links inside messages */
 .ant-list-item-meta-description a,
 .msg-mkdn-container a {
   color: #7ab3e0 !important;
@@ -212,33 +245,38 @@ button:has(> .anticon-right):hover {
   text-decoration: underline !important;
 }
 
-/* ===== 9. HEADER / TOP BAR ===== */
+/* ===== 10. HEADER ===== */
 .ant-layout-header {
-  background: rgba(20, 30, 48, 0.75) !important;
-  backdrop-filter: blur(6px) !important;
-  -webkit-backdrop-filter: blur(6px) !important;
+  background: rgba(8, 14, 30, 0.7) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
 }
 
-/* ===== 10. SCROLLBAR ===== */
+/* ===== 11. SCROLLBAR ===== */
 ::-webkit-scrollbar {
-  width: 6px !important;
+  width: 5px !important;
 }
 
 ::-webkit-scrollbar-track {
-  background: rgba(28, 28, 32, 0.3) !important;
+  background: transparent !important;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(80, 130, 190, 0.4) !important;
+  background: rgba(80, 130, 190, 0.3) !important;
   border-radius: 3px !important;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(80, 130, 190, 0.6) !important;
+  background: rgba(80, 130, 190, 0.5) !important;
 }
 
-/* ===== 11. MISC CLEANUP ===== */
+/* ===== 12. CLEANUP ===== */
 .ant-card,
 .ant-card-body {
   background: transparent !important;
+}
+
+/* Font size slider hide (from example) */
+div.mt-2 > .font-size-message {
+  display: none !important;
 }
